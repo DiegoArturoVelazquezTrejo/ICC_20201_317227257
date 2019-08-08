@@ -5,3 +5,5 @@ Introducción a Ciencias de la Computación en la Facultad de Ciencias
 de la Universidad Nacional Autónoma de México (UNAM). 
 
 Primer semestre. 
+contacto: velazquez@ciencias.unam.mx
+Diego Arturo Velázquez Trejo
