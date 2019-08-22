@@ -29,13 +29,13 @@ public class HeyJude{
 	    + "The movement you need is on your shoulder.";
 
 	
-        String[] coro = {HEY, DON, MAK, TAK, REM, LEH, THE, CAN, TOM};
-	String[] p1 = {HEY, DON, BEA, YOW,THEMIN, LES, THE, BEG, TOM};
-	String[] p2 = {AND}; // NA seis veces
-	String[] p3 = {HEY, DON, LET, YOH, REM, LEH, THE, CAN, TOM}; 
-	String[] p4 = {SOL, NA, NA, NA, NA, NA, NA}; // NA seis veces 
-	String[] p5 = {HEY, DON, MAK, TAK, REM, LES, THE, BEG, TOM}; // better cinco veces
-	String[] p6 = {NA,NA ,NA, NA, NA, NA, NA, HEY}; // Repetir dos veces (NA 9 veces, HEY)
+        String[] coro = {HEY, DON, MAK, TAK, REM, LEH, THE, CAN, TOM, "\n"};
+	String[] p1 = {HEY, DON, BEA, YOW,THEMIN, LES, THE, BEG, TOM, "\n"};
+	String[] p2 = {AND, NA, NA, NA, NA, NA, NA}; // NA seis veces
+	String[] p3 = {HEY, DON, LET, YOH, REM, LEH, THE, CAN, TOM, "\n"}; 
+	String[] p4 = {SOL, NA, NA, NA, NA, NA, NA, "\n"}; // NA seis veces 
+	String[] p5 = {HEY, DON, MAK, TAK, REM, LES, THE, BEG, TOM, "\n"}; // better cinco veces
+	String[] p6 = {NA,NA ,NA, NA, NA, NA, NA, HEY, "\n"}; // Repetir dos veces (NA 9 veces, HEY)
 	
 	String[][] parrafos = {coro, p1, p2, p3, p4, p5, p6};
 
