@@ -91,4 +91,12 @@ public class Vector2{
     	return "<circle cx=" +"'"+this.x+"'"+ "cy="+"'" + this.y +"'"+ "r='40' stroke='green' stroke-width='4' fill='yellow' />";
     }
 
+    /**
+    * Punto medio entre los lados de un triangulo
+    **/
+    public Vector2 puntoMedio(Vector2 vector1){
+      Vector2 vectorMedio = new Vector2((this.x+vector1.getX())/2, (this.y+vector1.getY())/2);
+      return vectorMedio; 
+    }
+
 }
