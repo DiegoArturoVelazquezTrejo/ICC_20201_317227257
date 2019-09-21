@@ -85,7 +85,7 @@ public class Triangulo{
     /*Convierte los atributos de la figura en una etiqueda svg válida*/
     public String toSVG(){
     	return "<polygon points= '"+Double.toString(a.getX())+", "+Double.toString(a.getY())+", "+Double.toString(b.getX())+", "+Double.toString(b.getY())+", "+Double.toString(c.getX())+", "+Double.toString(c.getY())+
-      "' stroke='purple' stroke-width=2 fill='red'/>";
+      "' stroke='blue' stroke-width=2 fill='transparent'/>";
     }
 
     /**
@@ -109,5 +109,14 @@ public class Triangulo{
     	if(!(o instanceof Triangulo)) return false;
     	@SuppressWarnings("unchecked") Triangulo trian = (Triangulo) o;
     	return this.a.equals(trian.getA()) && this.b.equals(trian.getB()) && this.c.equals(trian.getC());
+    }
+
+    /*Serpinsky*/
+    public String serpinsky(int n){
+      if(n == 0) return "";
+      Triangulo aux1 = new Triangulo(a, a.puntoMedio(b), a.puntoMedio(c));
+      Triangulo aux2 = new Triangulo(a.puntoMedio(b), b, b.puntoMedio(c));
+      Triangulo aux3 = new Triangulo(a.puntoMedio(c), c.puntoMedio(b), c);
+      return this.toSVG() + aux1.serpinsky(n-1) + aux2.serpinsky(n-1)+aux3.serpinsky(n-1);
     }
 }

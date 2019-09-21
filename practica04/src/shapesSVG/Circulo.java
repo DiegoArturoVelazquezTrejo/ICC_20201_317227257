@@ -52,7 +52,7 @@ public class Circulo{
     }
     /*Método que convierte los atributos de la figura a una etiqueta SVG*/
     public String toSVG(){
-	     return "<circle cx=" +"'"+this.centro.getX()+"'"+ " cy="+"'" + this.centro.getY()+"'" + " r="+"'"+this.radio+"'"+" stroke='green' stroke-width='4' fill='yellow' />";
+	     return "<circle cx=" +"'"+this.centro.getX()+"'"+ " cy="+"'" + this.centro.getY()+"'" + " r="+"'"+this.radio+"'"+" stroke='black' stroke-width='4' fill='transparent' />";
     }
     /*Getter del centro del círculo*/
     public Vector2 getCentro(){
@@ -107,5 +107,27 @@ public class Circulo{
     	if(!(o instanceof Circulo)) return false;
     	@SuppressWarnings("unchecked") Circulo cir = (Circulo) o;
     	return this.radio == cir.getRadio() && this.centro.equals(cir.getCentro());
+    }
+
+    /**
+     * Círculos recursivos dentro de otros
+     **/
+    public String circulinsky(int n){
+        if(n == 0) return "";
+        else{
+            //El cícrulo tiene un vector que es el centro del mismo y tiene un radio
+            Vector2 norte = new Vector2(this.centro.getX(), this.centro.getY()-this.radio);
+            Vector2 sur   = new Vector2(this.centro.getX(), this.centro.getY()+this.radio);
+            Vector2 este  = new Vector2(this.centro.getX()+this.radio, this.centro.getY());
+            Vector2 oeste = new Vector2(this.centro.getX()-this.radio, this.centro.getY());
+
+            Circulo cir1 = new Circulo(norte.puntoMedio(this.centro), this.radio/2);
+            Circulo cir2 = new Circulo(sur.puntoMedio(this.centro), this.radio/2);
+            Circulo cir3 = new Circulo(este.puntoMedio(this.centro), this.radio/2);
+            Circulo cir4 = new Circulo(oeste.puntoMedio(this.centro), this.radio/2);
+
+            return this.toSVG()+cir1.circulinsky(n-1)+cir2.circulinsky(n-1)+cir3.circulinsky(n-1)+cir4.circulinsky(n-1);
+        }
+
     }
 }

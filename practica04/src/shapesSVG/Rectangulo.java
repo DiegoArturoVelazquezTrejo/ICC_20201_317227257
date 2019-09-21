@@ -94,7 +94,7 @@ public class Rectangulo{
     }
     /*ToSVG convierte a una etiqueta las propiedades del rectángulo*/
     public String toSVG(){
-    	return "<rect x="+"'"+this.a.getX()+"'"+" y="+"'"+this.a.getY()+"'"+" width="+"'"+this.ancho+"'"+" height="+"'"+this.alto+"'"+"/>";
+    	return "<rect x="+"'"+this.a.getX()+"'"+" y="+"'"+this.a.getY()+"'"+" width="+"'"+this.ancho+"'"+" height="+"'"+this.alto+"'"+" fill='transparent' stroke='blue'/>";
     }
     /**
      *Método equals
@@ -118,5 +118,16 @@ public class Rectangulo{
       	       "Area: "+this.area+"\n"+
       	       "Perimetro: "+this.perimetro+"\n"+
       	       "Vector a: "+this.a.toString();
+    }
+
+    /**
+    * Cuadros recursivos dentro de otros cuadros
+    **/
+    public String cuadros(int n){
+      if(n == 0) return "";
+      else{
+        Rectangulo rec = new Rectangulo(new Vector2(this.a.getX()+50, this.a.getY()+50), (this.ancho-this.ancho/4), (this.alto-this.alto/4));
+        return this.toSVG()+rec.cuadros(n-1);
+      }
     }
 }
