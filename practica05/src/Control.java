@@ -18,8 +18,9 @@ public class Control{
   * @param : String cadena
   * @return : String cadena invertida
   **/
-  private static String reversa(String palabra){
+  private static String reversa(String pal){
     String reversa = "";
+    String palabra = pal.toLowerCase(); 
     for(int i = palabra.length()-1; i>-1; i--)
       reversa = reversa+ palabra.charAt(i);
     return reversa;
