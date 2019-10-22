@@ -34,6 +34,19 @@ public class ArbolBinario<T> implements Coleccion<T>{
   /* Número de nodos que tiene el arbol binario */
   private int elementos;
   /**
+   * Constructor sin parámetros. Tenemos que definirlo para no perderlo.
+   */
+  public ArbolBinario() {}
+  /**
+   * Construye un árbol binario a partir de una colección. El árbol binario
+   * tendrá los mismos elementos que la colección recibida.
+   * @param coleccion la colección a partir de la cual creamos el árbol
+   *        binario.
+   */
+  public ArbolBinario(Coleccion<T> coleccion) {
+
+  }
+  /**
   * Regresa la cantidad de nodos del arbol binario
   * @return la cantidad de nodos del arbol
   **/
