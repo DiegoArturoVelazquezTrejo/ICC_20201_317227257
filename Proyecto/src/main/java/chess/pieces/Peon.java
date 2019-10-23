@@ -1,6 +1,6 @@
 package chess.pieces;
 import chess.items.*;
-
+import java.util.LinkedList; 
 /* Clase Peón que extiende de la clase Pieza*/
 public class Peon extends Pieza{
 

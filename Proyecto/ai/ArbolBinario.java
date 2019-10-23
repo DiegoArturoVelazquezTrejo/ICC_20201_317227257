@@ -1,8 +1,10 @@
+
 package ai;
 /**
 * Clase para árbol binario
 * Nos permitirá poder manenjar posibilidades en el ajedrez para el algoritmo de IA.
 **/
+'''
 public class ArbolBinario<T> implements Coleccion<T>{
 
   /* Clase interna para nodos del árbol binario. */
@@ -16,7 +18,7 @@ public class ArbolBinario<T> implements Coleccion<T>{
     /* El elemento del nodo */
     private T elemento;
     /* Construye un nodo con un elemento*/
-    private Nodo(T elemento){
+    private Vertice(T elemento){
       this.elemento = elemento;
     }
     @Override public boolean hayPadre(){ return padre != null; }
@@ -69,3 +71,4 @@ public class ArbolBinario<T> implements Coleccion<T>{
     }
   }
 }
+'''

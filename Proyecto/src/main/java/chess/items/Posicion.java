@@ -3,9 +3,9 @@ package chess.items;
 /* Clase posición para determinar la posición de las piezas dentro de la matriz del tablero*/
 public class Posicion{
   /* Componente x de la matriz*/
-  private int x;
+  protected int x;
   /* Componente y de la matriz*/
-  private int y;
+  protected int y;
 
   /* Constructor de la clase Posicion */
   public Posicion(int x, int y){
@@ -14,7 +14,7 @@ public class Posicion{
   }
   /**
   * Método para comparar dos posiciones
-  * @param : Object posicion 
+  * @param : Object posicion
   **/
   @Override
   public boolean equals(Object obj){

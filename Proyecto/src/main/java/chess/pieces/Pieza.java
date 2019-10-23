@@ -1,17 +1,19 @@
 package chess.pieces;
-import chess.items.Posicion;
+import chess.items.*;
+import java.util.LinkedList;
+
 /**
 * Clase Abstracta para las piezas de ajedrez
 **/
 public abstract class Pieza{
   /* Posición de la pieza*/
-  private Posicion posicion;
+  protected Posicion posicion;
   /* Tipo de pieza*/
-  private EnumPieza tipoPieza;
+  protected EnumPieza tipoPieza;
   /* Color de la pieza */
-  private ColorEnum colorPieza;
+  protected ColorEnum colorPieza;
   /* Lista con los movimientos legales para las piezas*/
-  private LinkedList<Posicion> movimientosLegales;
+  protected LinkedList<Posicion> movimientosLegales;
 
   /** Constructor para la pieza
   * @param : int[][] posicion de la pieza
