@@ -39,6 +39,7 @@ public abstract class Pieza{
     if((o instanceof Pieza)) return false;
     @SuppressWarnings("unchecked") Pieza pieza = (Pieza) o;
     if(pieza.getPosicion() != this.posicion || pieza.getTipo() != this.tipoPieza) return false;
+    return true; 
   }
   /* Método para obtener la posición de la pieza */
   public Posicion getPosicion(){
