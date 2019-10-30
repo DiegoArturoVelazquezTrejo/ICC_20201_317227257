@@ -14,5 +14,5 @@ public enum EnumPieza{
   TORRE, // Torre del ajedrez
 
   CABALLO; // Caballo del ajedrez
-
+ 
 }

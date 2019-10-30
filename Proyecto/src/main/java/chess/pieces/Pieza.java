@@ -2,6 +2,7 @@ package chess.pieces;
 import chess.items.*;
 import java.util.LinkedList;
 
+/* Gradle path: export PATH=$PATH:/opt/gradle/gradle-5.6.3/bin */
 /**
 * Clase Abstracta para las piezas de ajedrez
 **/
@@ -20,9 +21,8 @@ public abstract class Pieza{
   * @param : EnumPieza tipo de pieza que es
   * @param : ColorEnum color de la pieza
   **/
-  public Pieza(Posicion posicion, EnumPieza tipoPieza, ColorEnum color){
+  public Pieza(Posicion posicion, ColorEnum color){
     this.posicion = posicion;
-    this.tipoPieza = tipoPieza;
     this.colorPieza = color;
   }
 
@@ -39,16 +39,14 @@ public abstract class Pieza{
     if((o instanceof Pieza)) return false;
     @SuppressWarnings("unchecked") Pieza pieza = (Pieza) o;
     if(pieza.getPosicion() != this.posicion || pieza.getTipo() != this.tipoPieza) return false;
-    return true; 
+    return true;
   }
   /* Método para obtener la posición de la pieza */
   public Posicion getPosicion(){
     return this.posicion;
   }
   /* Método para obtener los métodos legales que tiene la pieza*/
-  public LinkedList<Posicion> getMovimientosLegales(){
-    return this.movimientosLegales;
-  }
+  public abstract LinkedList<Posicion> obtenerMovimientosLegales(); 
   /* Método para obtener el tipo de pieza*/
   public EnumPieza getTipo(){
     return this.tipoPieza;

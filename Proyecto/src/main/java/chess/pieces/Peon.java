@@ -1,24 +1,15 @@
 package chess.pieces;
 import chess.items.*;
-import java.util.LinkedList; 
+import java.util.LinkedList;
 /* Clase Peón que extiende de la clase Pieza*/
 public class Peon extends Pieza{
 
   /* Constructor para la clase peón */
-  public Peon(Posicion posicion, EnumPieza tipoPieza, ColorEnum color){
-    super(posicion, tipoPieza, color);
+  public Peon(Posicion posicion, ColorEnum color){
+    super(posicion, color);
+    this.tipoPieza = EnumPieza.PEON;
   }
 
-  /* Escribiendo los movimientos legales para el peón */
-  @Override
-  public LinkedList<Posicion> getMovimientosLegales(){
-    if(this.movimientosLegales == null){
-      this.movimientosLegales = new LinkedList<Posicion>();
-      Posicion n = new Posicion(this.getPosicion().getX(), this.getPosicion().getY() +1);
-      this.movimientosLegales.add(n);
-    }
-    return this.movimientosLegales;
-  }
   /* Método para mover la pieza */
   @Override
   public void moverPieza(Posicion p){
@@ -27,5 +18,25 @@ public class Peon extends Pieza{
       this.movimientosLegales = null;
     }
     return;
+  }
+
+  /* ALGORITMO PRINCIPAL PARA CADA PIEZA */
+  public LinkedList<Posicion> obtenerMovimientosLegales(){
+    if(this.movimientosLegales == null){
+      LinkedList<Posicion> movimientosLegales = new LinkedList<Posicion>(); 
+    }
+    return this.movimientosLegales;
+  }
+
+
+  /** Método equals para la pieza de la Peon
+  * @param : Object Peon
+  **/
+  @Override
+  public boolean equals(Object obj){
+    if(!(obj instanceof Peon)) return false;
+    @SuppressWarnings("unchecked") Peon pieza = (Peon) obj;
+    if(pieza.getColor() == this.getColor() && this.getPosicion().equals(pieza.getPosicion())) return true;
+    else return false;
   }
 }
