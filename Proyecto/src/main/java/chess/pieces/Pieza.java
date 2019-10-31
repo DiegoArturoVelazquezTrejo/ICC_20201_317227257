@@ -15,6 +15,9 @@ public abstract class Pieza{
   protected ColorEnum colorPieza;
   /* Lista con los movimientos legales para las piezas*/
   protected LinkedList<Posicion> movimientosLegales;
+  /* Todas las piezas tienen el mismo tablero */
+
+
 
   /** Constructor para la pieza
   * @param : int[][] posicion de la pieza
@@ -27,7 +30,13 @@ public abstract class Pieza{
   }
 
   /* Método para mover la pieza */
-  abstract public void moverPieza(Posicion posicion);
+  public void moverPieza(Posicion p){
+    if(this.esMovimientoLegal(p)){
+      this.posicion = p;
+      this.movimientosLegales = null;
+    }
+    return;
+  }
 
   /* Método para validar el movimiento de la pieza */
   public boolean esMovimientoLegal(Posicion movimiento){
@@ -46,7 +55,7 @@ public abstract class Pieza{
     return this.posicion;
   }
   /* Método para obtener los métodos legales que tiene la pieza*/
-  public abstract LinkedList<Posicion> obtenerMovimientosLegales(); 
+  public abstract LinkedList<Posicion> obtenerMovimientosLegales();
   /* Método para obtener el tipo de pieza*/
   public EnumPieza getTipo(){
     return this.tipoPieza;
@@ -54,5 +63,11 @@ public abstract class Pieza{
   /* Método para obtener el color de la pieza*/
   public ColorEnum getColor(){
     return this.colorPieza;
+  }
+
+  /* Método toString */
+  @Override
+  public String toString(){
+    return this.tipoPieza.toString();
   }
 }

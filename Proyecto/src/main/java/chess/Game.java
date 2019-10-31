@@ -10,9 +10,11 @@ import java.util.LinkedList;
 public class Game{
   /* Método main */
   public static void main(String args[]){
-    Torre torre = new Torre(new Posicion(4,4), ColorEnum.BLANCO);
-    System.out.print(torre.obtenerMovimientosLegales());
-    Reina reina = new Reina(new Posicion(1,1), ColorEnum.NEGRO);
-    System.out.print(reina.obtenerMovimientosLegales());
+    Tablero tablero = Tablero.getInstance();
+    System.out.print(tablero.toString());
+    Pieza pieza = tablero.getPieza(new Posicion(1,0));
+    System.out.print(pieza.obtenerMovimientosLegales());
+    //Reina reina = new Reina(new Posicion(1,1), ColorEnum.NEGRO);
+    //System.out.print(reina.obtenerMovimientosLegales());
   }
 }

@@ -11,20 +11,10 @@ public class Alfil extends Pieza{
     this.tipoPieza = EnumPieza.ALFIL;
   }
 
-  /* Método para mover la pieza */
-  @Override
-  public void moverPieza(Posicion p){
-    if(this.esMovimientoLegal(p)){
-      this.posicion = p;
-      this.movimientosLegales = null;
-    }
-    return;
-  }
-
   /* ALGORITMO PRINCIPAL PARA CADA PIEZA */
   public LinkedList<Posicion> obtenerMovimientosLegales(){
     if(this.movimientosLegales == null){
-      LinkedList<Posicion> movimientosLegales = new LinkedList<Posicion>(); 
+      LinkedList<Posicion> movimientosLegales = new LinkedList<Posicion>();
     }
     return this.movimientosLegales;
   }

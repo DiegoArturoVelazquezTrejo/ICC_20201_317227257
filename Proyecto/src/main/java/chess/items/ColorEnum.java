@@ -9,3 +9,4 @@ public enum ColorEnum{
 
   NONE; /* No tiene color*/
 }
+ 

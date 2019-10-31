@@ -13,6 +13,22 @@ public enum EnumPieza{
 
   TORRE, // Torre del ajedrez
 
-  CABALLO; // Caballo del ajedrez
- 
+  CABALLO, // Caballo del ajedrez
+
+  NONE;
+
+  /* toString de enum */
+  @Override public String toString() {
+        switch(this){
+          case PEON: return "♟";
+          case ALFIL: return "♗";
+          case REINA : return "♕";
+          case REY: return "♔";
+          case TORRE : return "♖";
+          case CABALLO: return "♘";
+          case NONE : return " ";
+          default: throw new IllegalArgumentException();
+        }
+    }
+
 }

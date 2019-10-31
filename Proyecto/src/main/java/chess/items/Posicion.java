@@ -10,7 +10,7 @@ public class Posicion{
   /* Constructor de la clase Posicion */
   public Posicion(int x, int y){
     this.x = x;
-    this.y = y;
+    this.y = y; 
   }
   /**
   * Método para comparar dos posiciones
