@@ -7,5 +7,5 @@ Método suma de arreglo y método para hallar primos y primos menores.
 
 
 
-1. Para compilar: Posicionarse dentro de la carpeta src, javac Main.java
+1. Para compilar: Posicionarse afuera de la carpeta src, javac Main.java
 2. Para ejecutar el programa : java Main  
