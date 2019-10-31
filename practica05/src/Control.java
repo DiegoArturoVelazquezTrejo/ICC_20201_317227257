@@ -10,8 +10,8 @@ import java.util.ArrayList;
 **/
 
 public class Control{
-  /*Constructor por omisión privado para evitar instanciar la clase ya que sus métodos serán estáticos*/
-  private Control(){}
+  /*Constructor por omisión*/
+  public Control(){}
 
   /**
   * reversa te regresa la cadena reversa de una cadena.
@@ -20,7 +20,7 @@ public class Control{
   **/
   private static String reversa(String pal){
     String reversa = "";
-    String palabra = pal.toLowerCase(); 
+    String palabra = pal.toLowerCase();
     for(int i = palabra.length()-1; i>-1; i--)
       reversa = reversa+ palabra.charAt(i);
     return reversa;
@@ -30,7 +30,7 @@ public class Control{
   * @param : String cadena
   * @return : boolean <p> true si es palíndromo </p> <p> false si no es palíndromo </p>
   **/
-  public static boolean problema1(String cadena){
+  public boolean problema1(String cadena){
     return cadena.equals(reversa(cadena));
   }
 
@@ -40,7 +40,7 @@ public class Control{
   * @param : numero
   * @return : <p> true si el número es suma de elementos del arreglo </p> <p> false si no es suma </p>
   **/
-  public static boolean problema2(Integer[] arreglo, Integer num){
+  public boolean problema2(Integer[] arreglo, Integer num){
     quickSort(arreglo);
     int numero = num;
     int indice = 0;
@@ -108,7 +108,7 @@ public class Control{
   * ordena va a ordenar un arreglo de cualquier tipo de clase que extienda a Comparable para poder comparar los elementos del arreglo usando el algoritmo quickSort.
   * @param : arreglo que se ordenará.
   **/
-  public static  <T extends  Comparable<T>> void problema3(T[] arreglo){
+  public  <T extends  Comparable<T>> void problema3(T[] arreglo){
     quickSort(arreglo);
   }
   /**
@@ -151,7 +151,7 @@ public class Control{
   * @param : int número del cual se quieren saber si es primo o no.
   * @return : boolean <p> true -> si es primo </p> <p> false -> si no es primo </p>
   **/
-  public static boolean problema5(int numero){
+  public boolean problema5(int numero){
     if(numero == 1) return true;
     for(int i = 2; i<numero; i++){
       if((numero % i) == 0) return false;
@@ -163,7 +163,7 @@ public class Control{
   * @param : int número del cual se quieren obtener los primos menores.
   * @return : arreglo con los primos menores
   **/
-  public static Integer[] problema6(int numero){
+  public Integer[] problema6(int numero){
     ArrayList<Integer> primos = new ArrayList<Integer>();
     for(int i = 2; i < numero+1; i++)
       if(problema5(i)) primos.add(i);
