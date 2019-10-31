@@ -1,5 +1,11 @@
-Para ejecutar el archivo, se tendrá que posicionar en la carpeta de src y escribir la siguiente línea 
+Introducción a Ciencias de la Computación
 
-java main/Main.java > archivo.html
+Diego Arturo Velázquez Trejo
 
-Y posteriormente abrir el archivo html generado en el navegador. 
+Para ejecutar el archivo:
+
+1. se tendrá que posicionar en la carpeta de src y escribir la siguiente línea:  
+
+  java main/Main.java > archivo.html
+
+2. posteriormente abrir el archivo html en el navegador de chrome.
