@@ -1,4 +1,5 @@
 package src;
+import src.Control; 
 import java.util.Arrays;
 /**
 * Clase Main para evaluar a la clase Control
