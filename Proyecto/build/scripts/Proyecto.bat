@@ -82,7 +82,7 @@ set CMD_LINE_ARGS=%*
 set CLASSPATH=%APP_HOME%\lib\Proyecto.jar;%APP_HOME%\lib\core.jar
 
 @rem Execute Proyecto
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %PROYECTO_OPTS%  -classpath "%CLASSPATH%" chess/Game %CMD_LINE_ARGS%
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %PROYECTO_OPTS%  -classpath "%CLASSPATH%" gui.ChessGUI %CMD_LINE_ARGS%
 
 :end
 @rem End local scope for the variables with windows NT shell

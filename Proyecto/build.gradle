@@ -3,5 +3,5 @@ apply plugin:'application'
 mainClassName = "gui.ChessGUI"
 dependencies {
     // Dependency on local binaries
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['core.jar'])
 }
