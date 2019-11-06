@@ -10,11 +10,49 @@ public class Caballo extends Pieza{
     super(posicion, color);
     this.tipoPieza = EnumPieza.CABALLO;
   }
+  /* Método para verificar si una pieza se agrega a la lista o no*/
+  public void verificar(Posicion posicion, LinkedList<Posicion> lista){
+    Tablero tablero = Tablero.getInstance();
+    if(this.estaDentroTablero(posicion)){
+      Pieza pieza = tablero.getPieza(posicion);
+      if(pieza.getColor() == this.getColor()) return;
+      if(pieza.getColor() != this.getColor()){
+          lista.add(posicion);
+          return;
+      }
+    }
+    return;
+  }
 
   /* ALGORITMO PRINCIPAL PARA CADA PIEZA */
   public LinkedList<Posicion> obtenerMovimientosLegales(){
     if(this.movimientosLegales == null){
-      LinkedList<Posicion> movimientosLegales = new LinkedList<Posicion>();
+      this.movimientosLegales = new LinkedList<Posicion>();
+      Posicion uno = new Posicion(this.posicion.getX()-2, this.posicion.getY()+1);
+      this.verificar(uno, movimientosLegales);
+
+      Posicion dos = new Posicion(this.posicion.getX()-2, this.posicion.getY()-1);
+      this.verificar(dos, movimientosLegales);
+
+      Posicion tres = new Posicion(this.posicion.getX()-1, this.posicion.getY()-2);
+      this.verificar(tres, movimientosLegales);
+
+      Posicion cuatro = new Posicion(this.posicion.getX()+1, this.posicion.getY()-2);
+      this.verificar(cuatro, movimientosLegales);
+
+      Posicion cinco = new Posicion(this.posicion.getX()+2, this.posicion.getY()-1);
+      this.verificar(cinco, movimientosLegales);
+
+      Posicion seis = new Posicion(this.posicion.getX()+2, this.posicion.getY()+1);
+      this.verificar(seis, movimientosLegales);
+
+      Posicion siete = new Posicion(this.posicion.getX()-1, this.posicion.getY()+2);
+      this.verificar(siete, movimientosLegales);
+
+      Posicion ocho = new Posicion(this.posicion.getX()+1, this.posicion.getY()+2);
+      this.verificar(ocho, movimientosLegales);
+
+
     }
     return this.movimientosLegales;
   }

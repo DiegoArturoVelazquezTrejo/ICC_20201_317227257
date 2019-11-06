@@ -13,20 +13,61 @@ public class Reina extends Torre{
 
   /* ALGORITMO PRINCIPAL PARA CADA PIEZA */
   public LinkedList<Posicion> obtenerMovimientosLegales(){
+    Tablero tablero = Tablero.getInstance();
     if(this.movimientosLegales == null){
       LinkedList<Posicion> movimientosLegales = super.obtenerMovimientosLegales();
       /* Recorriendo los posibles movimientos de la pieza */
-      for(int i = this.posicion.getX(); i < 8; i++){
-        this.movimientosLegales.add(new Posicion(this.posicion.getX()+i, this.posicion.getY()+i));
+
+      int posY  = this.posicion.getY()+1;
+      for(int i = this.posicion.getX()+1; i < 8; i++){
+        Posicion siguientePosLegal = new Posicion(i, posY++);
+        if(!this.estaDentroTablero(siguientePosLegal)) break;
+        Pieza pieza = tablero.getPieza(siguientePosLegal);
+        if(pieza.getColor() == this.getColor())break;
+        if(pieza.getColor() != ColorEnum.NONE){
+            this.movimientosLegales.add(siguientePosLegal);
+            break;
+        }
+        this.movimientosLegales.add(siguientePosLegal);
       }
-      for(int i = this.posicion.getX(); i >= 0; i--){
-        this.movimientosLegales.add(new Posicion(this.posicion.getX()-i, this.posicion.getY()+i));
+      /* Moviendo sobre la diagonal derecha hacia abajo */
+      posY = this.posicion.getY();
+      for(int i = this.posicion.getX()+1; i < 8; i++){
+        Posicion siguientePosLegal = new Posicion(i, --posY);
+        if(!this.estaDentroTablero(siguientePosLegal)) break;
+        Pieza pieza = tablero.getPieza(siguientePosLegal);
+        if(pieza.getColor() == this.getColor())break;
+        if(pieza.getColor() != ColorEnum.NONE){
+            this.movimientosLegales.add(siguientePosLegal);
+            break;
+        }
+        this.movimientosLegales.add(siguientePosLegal);
       }
-      for(int i = this.posicion.getY(); i < 8; i++){
-        this.movimientosLegales.add(new Posicion(this.posicion.getX()-i, this.posicion.getY()-i));
+      /* Moviendo sobre la diagonal izquierda hacia arriba */
+      posY = this.posicion.getY() - 1;
+      for(int i = this.posicion.getX()-1; i >= 0; i--){
+        Posicion siguientePosLegal = new Posicion(i, posY--);
+        if(!this.estaDentroTablero(siguientePosLegal)) break;
+        Pieza pieza = tablero.getPieza(siguientePosLegal);
+        if(pieza.getColor() == this.getColor())break;
+        if(pieza.getColor() != ColorEnum.NONE){
+            this.movimientosLegales.add(siguientePosLegal);
+            break;
+        }
+        this.movimientosLegales.add(siguientePosLegal);
       }
-      for(int i = this.posicion.getY(); i >= 0; i--){
-        this.movimientosLegales.add(new Posicion(this.posicion.getX()+i, this.posicion.getY()-i));
+      /* Moviendo sobre la diagonal hacia abajo */
+      posY = this.posicion.getY() + 1;
+      for(int i = this.posicion.getX()-1; i >= 0; i--){
+        Posicion siguientePosLegal = new Posicion(i, posY++);
+        if(!this.estaDentroTablero(siguientePosLegal)) break;
+        Pieza pieza = tablero.getPieza(siguientePosLegal);
+        if(pieza.getColor() == this.getColor())break;
+        if(pieza.getColor() != ColorEnum.NONE){
+            this.movimientosLegales.add(siguientePosLegal);
+            break;
+        }
+        this.movimientosLegales.add(siguientePosLegal);
       }
     }
     return this.movimientosLegales;

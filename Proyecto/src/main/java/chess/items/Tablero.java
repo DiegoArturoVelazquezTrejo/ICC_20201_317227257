@@ -41,10 +41,11 @@ public class Tablero{
     this.matriz[SIZE-1][3]      = new Reina(new Posicion(SIZE-1,3), ColorEnum.BLANCO);
     this.matriz[SIZE-1][SIZE-4] = new Rey(new Posicion(SIZE-1,SIZE-4), ColorEnum.BLANCO);
 
+
     /* Colocando los peones en el tablero */
     for(int i = 0; i < SIZE; i++){
       this.matriz[1][i]      = new Peon(new Posicion(1,i), ColorEnum.NEGRO);
-      this.matriz[SIZE-2][i] = new Peon(new Posicion(1,i), ColorEnum.BLANCO);
+      this.matriz[SIZE-2][i] = new Peon(new Posicion(SIZE-2,i), ColorEnum.BLANCO);
     }
 
     /* Colocando piezas vacías en las demás casillas */
@@ -83,5 +84,8 @@ public class Tablero{
     //if(posicion.estaFueraDelTablero(SIZE)) return null;
     return this.matriz[posicion.getX()][posicion.getY()];
   }
+
+  /* Getter del tamaño del tablero*/
+  public int getSize(){return this.SIZE;}
 
 }

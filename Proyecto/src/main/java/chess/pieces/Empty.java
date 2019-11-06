@@ -9,7 +9,7 @@ public class Empty extends Pieza{
   /* Constructor por omisión */
   public Empty(Posicion posicion, ColorEnum color){
     super(posicion, color);
-    this.tipoPieza = EnumPieza.NONE; 
+    this.tipoPieza = EnumPieza.NONE;
   }
 
   public Empty(){

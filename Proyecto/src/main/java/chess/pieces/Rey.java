@@ -13,8 +13,24 @@ public class Rey extends Pieza{
 
   /* ALGORITMO PRINCIPAL PARA CADA PIEZA */
   public LinkedList<Posicion> obtenerMovimientosLegales(){
+    Tablero tablero = Tablero.getInstance();
     if(this.movimientosLegales == null){
-      LinkedList<Posicion> movimientosLegales = new LinkedList<Posicion>();
+      this.movimientosLegales = new LinkedList<Posicion> ();
+      /* Recorriendo los posibles movimientos de la pieza */
+
+      int x = this.posicion.getX() -1;
+      int y = this.posicion.getY() -1;
+      for(int i = 0; i <3; i++){
+        for(int j = 0; j < 3; j++){
+          Posicion siguientePosLegal = new Posicion(x,y+j);
+          if(this.estaDentroTablero(siguientePosLegal)) {
+            Pieza pieza = tablero.getPieza(siguientePosLegal);
+            if(pieza.getColor() != this.getColor())
+              movimientosLegales.add(siguientePosLegal);
+          }
+        }
+        x++;
+      }
     }
     return this.movimientosLegales;
   }

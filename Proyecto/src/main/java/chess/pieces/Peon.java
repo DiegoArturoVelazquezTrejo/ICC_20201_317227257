@@ -10,11 +10,36 @@ public class Peon extends Pieza{
     this.tipoPieza = EnumPieza.PEON;
   }
 
-
+  public void verificar(Posicion posicion, LinkedList<Posicion> lista){
+    Tablero tablero = Tablero.getInstance();
+    if(this.estaDentroTablero(posicion)) {
+      Pieza pieza = tablero.getPieza(posicion);
+      if(pieza.getColor() != this.getColor()){
+        lista.add(posicion);
+      }
+    }
+    return;
+  }
   /* ALGORITMO PRINCIPAL PARA CADA PIEZA */
   public LinkedList<Posicion> obtenerMovimientosLegales(){
-    if(this.movimientosLegales == null){
-      LinkedList<Posicion> movimientosLegales = new LinkedList<Posicion>();
+    Tablero tablero = Tablero.getInstance();
+    if (this.movimientosLegales == null) {
+        this.movimientosLegales = new LinkedList<Posicion>();
+        // Moviéndose para adelante
+        if(this.getColor() == ColorEnum.NEGRO){
+          Posicion siguientePosLegal = new Posicion(this.posicion.getX()+1, this.posicion.getY());
+          verificar(siguientePosLegal, this.movimientosLegales);
+          if(this.posicion.getX() == 1){
+            verificar(new Posicion(this.posicion.getX()+2, this.posicion.getY()), this.movimientosLegales);
+          }
+        }
+        else if(this.getColor() == ColorEnum.BLANCO){
+          Posicion siguientePosLegal = new Posicion(this.posicion.getX()-1, this.posicion.getY());
+          verificar(siguientePosLegal, this.movimientosLegales);
+          if(this.posicion.getX() == 6){
+            verificar(new Posicion(this.posicion.getX()-2, this.posicion.getY()), this.movimientosLegales);
+          }
+        }
     }
     return this.movimientosLegales;
   }

@@ -6,11 +6,11 @@ public class Posicion{
   protected int x;
   /* Componente y de la matriz*/
   protected int y;
-
+  
   /* Constructor de la clase Posicion */
   public Posicion(int x, int y){
     this.x = x;
-    this.y = y; 
+    this.y = y;
   }
   /**
   * Método para comparar dos posiciones

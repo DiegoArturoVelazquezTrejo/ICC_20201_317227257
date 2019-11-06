@@ -70,4 +70,9 @@ public abstract class Pieza{
   public String toString(){
     return this.tipoPieza.toString();
   }
+
+  /* Método para ver si el movimiento de una pieza está fuera del tablero o no*/
+  public boolean estaDentroTablero(Posicion posicion){
+    return (posicion.getX()<8 && posicion.getY() <8) && (posicion.getX()>= 0 && posicion.getY() >= 0);
+  }
 }
