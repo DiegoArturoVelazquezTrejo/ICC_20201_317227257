@@ -124,4 +124,10 @@ public class Triangulo extends Figura{
       Triangulo aux3 = new Triangulo(a.puntoMedio(c), c.puntoMedio(b), c);
       return this.toSVG() + aux1.serpinsky(n-1) + aux2.serpinsky(n-1)+aux3.serpinsky(n-1);
     }
+
+    public void transformacion(Transformacion f ){
+      this.a = f.transformacion(this.a);
+      this.b = f.transformacion(this.b);
+      this.c = f.transformacion(this.c);
+    }
 }
