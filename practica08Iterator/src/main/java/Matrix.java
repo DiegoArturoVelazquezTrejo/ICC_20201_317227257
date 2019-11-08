@@ -23,7 +23,7 @@ public class Matrix implements Iterable<Double>{
         return Matrix.this.matriz[this.indiceFila][this.indiceColumna];
       }
       public boolean hasNext(){
-        if(indiceColumna == Matrix.this.matriz.length-1 && indiceFila == Matrix.this.matriz[0].length-2) return false;
+        if(indiceFila >= Matrix.this.matriz.length || (indiceColumna == Matrix.this.matriz.length-1 && indiceFila == Matrix.this.matriz[0].length-2)) return false;
         return true;
       }
     }
