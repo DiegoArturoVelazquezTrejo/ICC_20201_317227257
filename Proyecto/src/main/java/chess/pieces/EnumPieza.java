@@ -22,7 +22,7 @@ public enum EnumPieza{
         switch(this){
           case PEON: return "♟";
           case ALFIL: return "♗";
-          case REINA : return "♕";  
+          case REINA : return "♕";
           case REY: return "♔";
           case TORRE : return "♖";
           case CABALLO: return "♘";

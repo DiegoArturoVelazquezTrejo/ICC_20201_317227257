@@ -30,13 +30,13 @@ public class Tablero{
     this.matriz[SIZE-1][SIZE-2] = new Caballo(new Posicion(SIZE-1,SIZE-2), ColorEnum.BLANCO);
 
     /* Colocando los alfiles en el tablero */
-    this.matriz[0][2]           = new Alfil(new Posicion(0,1), ColorEnum.NEGRO);
+    this.matriz[0][2]           = new Alfil(new Posicion(0,2), ColorEnum.NEGRO);
     this.matriz[0][SIZE-3]      = new Alfil(new Posicion(0,SIZE-3), ColorEnum.NEGRO);
     this.matriz[SIZE-1][2]      = new Alfil(new Posicion(SIZE-1,2), ColorEnum.BLANCO);
     this.matriz[SIZE-1][SIZE-3] = new Alfil(new Posicion(SIZE-1,SIZE-3), ColorEnum.BLANCO);
 
     /* Colocando los reyes y reinas en el tablero */
-    this.matriz[0][3]           = new Rey(new Posicion(0,1), ColorEnum.NEGRO);
+    this.matriz[0][3]           = new Rey(new Posicion(0,3), ColorEnum.NEGRO);
     this.matriz[0][SIZE-4]      = new Reina(new Posicion(0,SIZE-4), ColorEnum.NEGRO);
     this.matriz[SIZE-1][3]      = new Reina(new Posicion(SIZE-1,3), ColorEnum.BLANCO);
     this.matriz[SIZE-1][SIZE-4] = new Rey(new Posicion(SIZE-1,SIZE-4), ColorEnum.BLANCO);
@@ -81,8 +81,7 @@ public class Tablero{
   * @return : Pieza
   **/
   public Pieza getPieza(Posicion posicion ){
-    //if(posicion.estaFueraDelTablero(SIZE)) return null;
-    return this.matriz[posicion.getX()][posicion.getY()];
+    return this.matriz[posicion.getY()][posicion.getX()];
   }
 
   /* Getter del tamaño del tablero*/
