@@ -9,7 +9,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class ChessGUI extends PApplet{
-    int PIXEL_SIZE = 75;
+    int PIXEL_SIZE = 70;
     Tablero board = Tablero.getInstance();
     PImage torre_negra, torre_blanca;
     PImage alfil_negro, alfil_blanco;
@@ -24,7 +24,7 @@ public class ChessGUI extends PApplet{
 
     @Override
     public void settings(){
-        size(600,600);
+        size(550,550);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class ChessGUI extends PApplet{
                     else fill(45,45,45);
                 }
                 rect(i*PIXEL_SIZE,j*PIXEL_SIZE,PIXEL_SIZE,PIXEL_SIZE);
-                Pieza p = board.getPieza(new Posicion(i, j));
+                Pieza p = board.getPieza(new Posicion(i, j), 0);
                 drawPiece(p);
             }
         }
@@ -115,6 +115,27 @@ public class ChessGUI extends PApplet{
             default:
                 break;
         }
+    }
+
+    @Override
+    public void mouseClicked(){
+      int x = mouseX / PIXEL_SIZE;
+      int y = mouseY / PIXEL_SIZE;
+      Posicion p = new Posicion(y,x);
+      System.out.println(p);
+      Pieza pieza = board.getPieza(p);
+      dibujaMovimientosPosibles(pieza);
+    }
+
+    public void dibujaMovimientosPosibles(Pieza pieza){
+      stroke(255,0,0);
+      fill(144,144,144,100);
+      for(Posicion p : pieza.obtenerMovimientosLegales()){
+        int x = p.getY();
+        int y = p.getX();
+        rect(x*PIXEL_SIZE, y*PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+      }
+      stroke(0,0,0);
     }
 
 }

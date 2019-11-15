@@ -27,7 +27,7 @@ public class Reina extends Torre{
         if(pieza.getColor() != ColorEnum.NONE){
             this.movimientosLegales.add(siguientePosLegal);
             break;
-        }
+        } 
         this.movimientosLegales.add(siguientePosLegal);
       }
       /* Moviendo sobre la diagonal derecha hacia abajo */

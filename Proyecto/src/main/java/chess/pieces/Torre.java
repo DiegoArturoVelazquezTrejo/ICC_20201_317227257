@@ -17,7 +17,7 @@ public class Torre extends Pieza{
         Tablero tablero = Tablero.getInstance();
         if (this.movimientosLegales == null) {
             this.movimientosLegales = new LinkedList<Posicion>();
-
+ 
             // Moviéndose para adelante
             for(int i = this.posicion.getX()+1;i < 8; i++){
                 Posicion siguientePosLegal = new Posicion(i, this.posicion.getY());

@@ -16,10 +16,7 @@ public class Caballo extends Pieza{
     if(this.estaDentroTablero(posicion)){
       Pieza pieza = tablero.getPieza(posicion);
       if(pieza.getColor() == this.getColor()) return;
-      if(pieza.getColor() != this.getColor()){
-          lista.add(posicion);
-          return;
-      }
+      else if(pieza.getColor() == ColorEnum.NONE || pieza.getColor() != this.getColor()) lista.add(posicion);
     }
     return;
   }
@@ -27,6 +24,7 @@ public class Caballo extends Pieza{
   /* ALGORITMO PRINCIPAL PARA CADA PIEZA */
   public LinkedList<Posicion> obtenerMovimientosLegales(){
     if(this.movimientosLegales == null){
+
       this.movimientosLegales = new LinkedList<Posicion>();
       Posicion uno = new Posicion(this.posicion.getX()-2, this.posicion.getY()+1);
       this.verificar(uno, movimientosLegales);

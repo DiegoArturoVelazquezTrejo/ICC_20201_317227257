@@ -17,7 +17,7 @@ public class Rey extends Pieza{
     if(this.movimientosLegales == null){
       this.movimientosLegales = new LinkedList<Posicion> ();
       /* Recorriendo los posibles movimientos de la pieza */
-
+ 
       int x = this.posicion.getX() -1;
       int y = this.posicion.getY() -1;
       for(int i = 0; i <3; i++){

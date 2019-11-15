@@ -11,7 +11,7 @@ public class Empty extends Pieza{
     super(posicion, color);
     this.tipoPieza = EnumPieza.NONE;
   }
-
+ 
   public Empty(){
     super(new Posicion(0,0), ColorEnum.NONE);
   }

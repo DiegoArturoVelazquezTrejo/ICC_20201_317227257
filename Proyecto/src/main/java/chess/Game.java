@@ -10,7 +10,6 @@ import java.util.LinkedList;
 public class Game{
   /* Método main */
   public static void main(String args[]){
-    Tablero tablero = Tablero.getInstance();
-    System.out.print(tablero.toString());
+    
   }
 }

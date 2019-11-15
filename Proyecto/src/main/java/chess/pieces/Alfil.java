@@ -10,7 +10,7 @@ public class Alfil extends Pieza{
     super(posicion, color);
     this.tipoPieza = EnumPieza.ALFIL;
   }
-
+ 
   /* ALGORITMO PRINCIPAL PARA CADA PIEZA */
   public LinkedList<Posicion> obtenerMovimientosLegales(){
     Tablero tablero = Tablero.getInstance();
