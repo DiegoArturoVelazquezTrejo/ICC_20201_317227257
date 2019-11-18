@@ -58,6 +58,7 @@ public class ChessGUI extends PApplet{
       dibujaMovimientosPosibles();
     }
 
+    /* Método que dibuja el tablero */
     public void dibujaTablero(){
         for (int i = 0; i < board.getSize();i++) {
             for (int j = 0; j < board.getSize(); j++) {
@@ -74,7 +75,10 @@ public class ChessGUI extends PApplet{
             }
         }
     }
-
+    /**
+    * Método que dibuja una pieza en el tablero
+    * @param : Pieza
+    **/
     public void drawPiece(Pieza p){
         int x = p.getPosicion().getY();
         int y = p.getPosicion().getX();
@@ -125,7 +129,9 @@ public class ChessGUI extends PApplet{
                 break;
         }
     }
-
+    /* Método que realiza una acción al recibir el click del mouse
+    va a seleccionar la pieza en caso de no tenerla seleccionada y en caso de ya tenerla
+    seleccionada, moverá la pieza a la posición que se seleccionó por segunda vez */
     @Override
     public void mouseClicked() {
         dibujaTablero();
@@ -160,7 +166,7 @@ public class ChessGUI extends PApplet{
         }
 
     }
-
+    /* Método que dibuja los movimientos posibles de una pieza seleccionada */
     public void dibujaMovimientosPosibles(){
         stroke(255, 0, 0);
         fill(0, 0, 0, 100);
@@ -171,7 +177,7 @@ public class ChessGUI extends PApplet{
         }
         stroke(0, 0, 0);
     }
-
+    /* Método que indica el turno del jugador */
     public void indicaTurno() {
         System.out.println("************************************************");
         System.out.println("-- -- -- -- -- -- -- TURNO -- -- -- -- -- -- -- --");
