@@ -40,6 +40,9 @@ public abstract class Pieza{
 
   /* Método para validar el movimiento de la pieza */
   public boolean esMovimientoLegal(Posicion movimiento){
+    if(this.movimientosLegales == null){
+      this.movimientosLegales = new LinkedList<>(); 
+    }
     return movimientosLegales.contains(movimiento) ? true : false;
   }
   /* Método que compara piezas */

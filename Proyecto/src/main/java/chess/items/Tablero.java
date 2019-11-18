@@ -94,4 +94,21 @@ public class Tablero{
   /* Getter del tamaño del tablero*/
   public int getSize(){return this.SIZE;}
 
+  /**
+  * Método para mover las piezas dentro del tablero
+  * @param : Posicion p (antigua posicion)
+  * @param : Posicion q (nueva posición)
+  * @return : bool true si se pudo mover la pieza, false de lo contrario
+  **/
+  public boolean move(Posicion p, Posicion q){
+      if(!(p.estaFueraDelTablero(8)) || !(q.estaFueraDelTablero(8)))return false;
+      Pieza piece = this.getPieza(p);
+      piece.obtenerMovimientosLegales();
+      if(!piece.esMovimientoLegal(q))return false;
+      piece.moverPieza(q);
+      this.matriz[p.getX()][p.getY()] = new Empty(p,ColorEnum.NONE);
+      this.matriz[q.getX()][q.getY()] = piece;
+      return true;
+  }
+
 }

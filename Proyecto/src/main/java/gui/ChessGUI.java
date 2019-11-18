@@ -1,5 +1,7 @@
 package gui;
 
+import java.util.LinkedList;
+import java.util.List;
 import chess.items.Tablero;
 import chess.items.Posicion;
 import chess.items.ColorEnum;
@@ -18,6 +20,11 @@ public class ChessGUI extends PApplet{
     PImage rey_blanco, rey_negro;
     PImage reina_negro, reina_blanco;
 
+    ColorEnum turn = ColorEnum.BLANCO;
+    Posicion selected = null;
+    List<Posicion> movimientosLegales = new LinkedList<>();
+
+
     public static void main(String[] args) {
         PApplet.main("gui.ChessGUI");
     }
@@ -30,6 +37,7 @@ public class ChessGUI extends PApplet{
     @Override
     public void setup(){
         System.out.println(board.toString());
+        indicaTurno();
         torre_blanca   = loadImage(getClass().getResource("/white-rook-50.png").getPath());
         torre_negra    = loadImage(getClass().getResource("/black-rook-50.png").getPath());
         caballo_blanco = loadImage(getClass().getResource("/white-knight-50.png").getPath());
@@ -42,14 +50,15 @@ public class ChessGUI extends PApplet{
         rey_blanco   = loadImage(getClass().getResource("/white-king-50.png").getPath());
         peon_negro   = loadImage(getClass().getResource("/black-pawn-50.png").getPath());
         peon_blanco  = loadImage(getClass().getResource("/white-pawn-50.png").getPath());
+        dibujaTablero();
     }
 
     @Override
     public void draw(){
-        drawBoard();
+      dibujaMovimientosPosibles();
     }
 
-    public void drawBoard(){
+    public void dibujaTablero(){
         for (int i = 0; i < board.getSize();i++) {
             for (int j = 0; j < board.getSize(); j++) {
                 if(i%2==0){
@@ -118,24 +127,56 @@ public class ChessGUI extends PApplet{
     }
 
     @Override
-    public void mouseClicked(){
-      int x = mouseX / PIXEL_SIZE;
-      int y = mouseY / PIXEL_SIZE;
-      Posicion p = new Posicion(y,x);
-      System.out.println(p);
-      Pieza pieza = board.getPieza(p);
-      dibujaMovimientosPosibles(pieza);
+    public void mouseClicked() {
+        dibujaTablero();
+        int x = mouseX / PIXEL_SIZE;
+        int y = mouseY / PIXEL_SIZE;
+        Posicion p = new Posicion(y,x);
+        if(selected == null){
+          selected = p;
+          Pieza pieza = board.getPieza(p);
+          this.movimientosLegales = pieza.obtenerMovimientosLegales();
+          return;
+        }else if(board.getPieza(p).getColor().equals(turn)){
+          selected = p;
+          Pieza pieza = board.getPieza(p);
+          this.movimientosLegales = pieza.obtenerMovimientosLegales();
+          return;
+        }else{
+          Pieza pieza2 = board.getPieza(p);
+          if(board.getPieza(selected).getColor().equals(turn))
+            if(this.board.move(selected, p)){
+              if (turn.equals(ColorEnum.BLANCO))
+                turn = ColorEnum.NEGRO;
+              else
+                turn = ColorEnum.BLANCO;
+              selected = null;
+              this.movimientosLegales = new LinkedList<>();
+              dibujaTablero();
+              indicaTurno();
+              return;
+            }
+          this.movimientosLegales = new LinkedList<>();
+        }
+
     }
 
-    public void dibujaMovimientosPosibles(Pieza pieza){
-      stroke(255,0,0);
-      fill(144,144,144,100);
-      for(Posicion p : pieza.obtenerMovimientosLegales()){
-        int x = p.getY();
-        int y = p.getX();
-        rect(x*PIXEL_SIZE, y*PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
-      }
-      stroke(0,0,0);
+    public void dibujaMovimientosPosibles(){
+        stroke(255, 0, 0);
+        fill(0, 0, 0, 100);
+        for (Posicion g : movimientosLegales) {
+            int y = g.getX();
+            int x = g.getY();
+            rect(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+        }
+        stroke(0, 0, 0);
+    }
+
+    public void indicaTurno() {
+        System.out.println("************************************************");
+        System.out.println("-- -- -- -- -- -- -- TURNO -- -- -- -- -- -- -- --");
+        System.out.println("Es el turno de: "+turn.toString().toLowerCase());
+        System.out.println("************************************************");
     }
 
 }
