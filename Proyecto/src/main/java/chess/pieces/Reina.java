@@ -23,11 +23,11 @@ public class Reina extends Torre{
         Posicion siguientePosLegal = new Posicion(i, posY++);
         if(!this.estaDentroTablero(siguientePosLegal)) break;
         Pieza pieza = tablero.getPieza(siguientePosLegal);
-        if(pieza.getColor() == this.getColor())break;
-        if(pieza.getColor() != ColorEnum.NONE){
+        if(pieza.getColor().equals(this.getColor()))break;
+        if(!pieza.getColor().equals(ColorEnum.NONE)){
             this.movimientosLegales.add(siguientePosLegal);
             break;
-        } 
+        }
         this.movimientosLegales.add(siguientePosLegal);
       }
       /* Moviendo sobre la diagonal derecha hacia abajo */
@@ -36,8 +36,8 @@ public class Reina extends Torre{
         Posicion siguientePosLegal = new Posicion(i, --posY);
         if(!this.estaDentroTablero(siguientePosLegal)) break;
         Pieza pieza = tablero.getPieza(siguientePosLegal);
-        if(pieza.getColor() == this.getColor())break;
-        if(pieza.getColor() != ColorEnum.NONE){
+        if(pieza.getColor().equals(this.getColor()))break;
+        if(!pieza.getColor().equals(ColorEnum.NONE)){
             this.movimientosLegales.add(siguientePosLegal);
             break;
         }
@@ -49,8 +49,8 @@ public class Reina extends Torre{
         Posicion siguientePosLegal = new Posicion(i, posY--);
         if(!this.estaDentroTablero(siguientePosLegal)) break;
         Pieza pieza = tablero.getPieza(siguientePosLegal);
-        if(pieza.getColor() == this.getColor())break;
-        if(pieza.getColor() != ColorEnum.NONE){
+        if(pieza.getColor().equals(this.getColor()))break;
+        if(!pieza.getColor().equals(ColorEnum.NONE)){
             this.movimientosLegales.add(siguientePosLegal);
             break;
         }
@@ -62,8 +62,8 @@ public class Reina extends Torre{
         Posicion siguientePosLegal = new Posicion(i, posY++);
         if(!this.estaDentroTablero(siguientePosLegal)) break;
         Pieza pieza = tablero.getPieza(siguientePosLegal);
-        if(pieza.getColor() == this.getColor())break;
-        if(pieza.getColor() != ColorEnum.NONE){
+        if(pieza.getColor().equals(this.getColor()))break;
+        if(!pieza.getColor().equals(ColorEnum.NONE)){
             this.movimientosLegales.add(siguientePosLegal);
             break;
         }

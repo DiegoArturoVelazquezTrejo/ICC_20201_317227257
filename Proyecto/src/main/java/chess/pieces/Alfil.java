@@ -10,7 +10,7 @@ public class Alfil extends Pieza{
     super(posicion, color);
     this.tipoPieza = EnumPieza.ALFIL;
   }
- 
+
   /* ALGORITMO PRINCIPAL PARA CADA PIEZA */
   public LinkedList<Posicion> obtenerMovimientosLegales(){
     Tablero tablero = Tablero.getInstance();
@@ -24,47 +24,53 @@ public class Alfil extends Pieza{
         Posicion siguientePosLegal = new Posicion(i, posY++);
         if(!this.estaDentroTablero(siguientePosLegal)) break;
         Pieza pieza = tablero.getPieza(siguientePosLegal);
-        if(pieza.getColor() == this.getColor())break;
-        if(pieza.getColor() != ColorEnum.NONE){
+        if(pieza.getColor().equals(this.getColor()))break;
+        if(!pieza.getColor().equals(ColorEnum.NONE)){
             this.movimientosLegales.add(siguientePosLegal);
             break;
         }
         this.movimientosLegales.add(siguientePosLegal);
       }
+
+
       /* Moviendo sobre la diagonal derecha hacia abajo */
-      posY = this.posicion.getY();
+      posY = this.posicion.getY()-1;
       for(int i = this.posicion.getX()+1; i < 8; i++){
-        Posicion siguientePosLegal = new Posicion(i, --posY);
+        Posicion siguientePosLegal = new Posicion(i, posY--);
         if(!this.estaDentroTablero(siguientePosLegal)) break;
         Pieza pieza = tablero.getPieza(siguientePosLegal);
-        if(pieza.getColor() == this.getColor())break;
-        if(pieza.getColor() != ColorEnum.NONE){
+        if(pieza.getColor().equals(this.getColor()))break;
+        if(!pieza.getColor().equals(ColorEnum.NONE)){
             this.movimientosLegales.add(siguientePosLegal);
             break;
         }
         this.movimientosLegales.add(siguientePosLegal);
       }
+
       /* Moviendo sobre la diagonal izquierda hacia arriba */
       posY = this.posicion.getY() - 1;
       for(int i = this.posicion.getX()-1; i >= 0; i--){
         Posicion siguientePosLegal = new Posicion(i, posY--);
         if(!this.estaDentroTablero(siguientePosLegal)) break;
         Pieza pieza = tablero.getPieza(siguientePosLegal);
-        if(pieza.getColor() == this.getColor())break;
-        if(pieza.getColor() != ColorEnum.NONE){
+        if(pieza.getColor().equals(this.getColor()))break;
+        if(!pieza.getColor().equals(ColorEnum.NONE)){
             this.movimientosLegales.add(siguientePosLegal);
             break;
         }
         this.movimientosLegales.add(siguientePosLegal);
       }
       /* Moviendo sobre la diagonal hacia abajo */
+
+
+
       posY = this.posicion.getY() + 1;
       for(int i = this.posicion.getX()-1; i >= 0; i--){
         Posicion siguientePosLegal = new Posicion(i, posY++);
         if(!this.estaDentroTablero(siguientePosLegal)) break;
         Pieza pieza = tablero.getPieza(siguientePosLegal);
-        if(pieza.getColor() == this.getColor())break;
-        if(pieza.getColor() != ColorEnum.NONE){
+        if(pieza.getColor().equals(this.getColor()))break;
+        if(!pieza.getColor().equals(ColorEnum.NONE)){
             this.movimientosLegales.add(siguientePosLegal);
             break;
         }

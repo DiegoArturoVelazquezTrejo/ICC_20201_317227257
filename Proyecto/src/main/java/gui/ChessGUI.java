@@ -55,6 +55,7 @@ public class ChessGUI extends PApplet{
 
     @Override
     public void draw(){
+      dibujaTablero();
       dibujaMovimientosPosibles();
     }
 
@@ -158,7 +159,6 @@ public class ChessGUI extends PApplet{
                 turn = ColorEnum.BLANCO;
               selected = null;
               this.movimientosLegales = new LinkedList<>();
-              dibujaTablero();
               indicaTurno();
               return;
             }
@@ -167,7 +167,7 @@ public class ChessGUI extends PApplet{
 
     }
     /* Método que dibuja los movimientos posibles de una pieza seleccionada */
-    public void dibujaMovimientosPosibles(){
+    public void dibujaMovimientosPosibles() {
         stroke(255, 0, 0);
         fill(0, 0, 0, 100);
         for (Posicion g : movimientosLegales) {

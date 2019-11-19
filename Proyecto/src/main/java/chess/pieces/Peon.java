@@ -18,7 +18,7 @@ public class Peon extends Pieza{
     Tablero tablero = Tablero.getInstance();
     if(this.estaDentroTablero(posicion)) {
       Pieza pieza = tablero.getPieza(posicion);
-      if(pieza.getColor() == ColorEnum.NONE){
+      if(pieza.getColor().equals(ColorEnum.NONE)){
         lista.add(posicion);
       }
     }
@@ -32,8 +32,14 @@ public class Peon extends Pieza{
   public void verificarAtaque(Posicion posicion, LinkedList<Posicion> lista){
     Tablero tablero = Tablero.getInstance();
     if(this.estaDentroTablero(posicion)){
-      if(!(tablero.getPieza(posicion) instanceof Empty) && (tablero.getPieza(posicion).getColor() != this.getColor()))
-        lista.add(posicion);
+      Pieza pieza = tablero.getPieza(posicion);
+      if(!pieza.getColor().equals(ColorEnum.NONE))
+        if(!(pieza.getColor().equals(this.getColor())))
+          lista.add(posicion);
+        else
+          return;
+      else
+        return;
     }
     return;
   }
@@ -44,26 +50,44 @@ public class Peon extends Pieza{
     if (this.movimientosLegales == null) {
         this.movimientosLegales = new LinkedList<Posicion>();
         // Moviéndose para adelante
-        if(this.getColor() == ColorEnum.NEGRO){
-          Posicion siguientePosLegal = new Posicion(this.posicion.getX()+1, this.posicion.getY());
-          verificar(siguientePosLegal, this.movimientosLegales);
-          if(this.posicion.getX() == 1 && (tablero.getPieza(new Posicion(2,this.posicion.getY())) instanceof Empty))  {
-            verificar(new Posicion(this.posicion.getX()+2, this.posicion.getY()), this.movimientosLegales);
-          }
-          // Movimiento para atacar piezas
-          verificarAtaque(new Posicion(this.posicion.getX()+1, this.posicion.getY()-1), this.movimientosLegales);
-          verificarAtaque(new Posicion(this.posicion.getX()+1, this.posicion.getY()+1), this.movimientosLegales);
+
+
+
+        switch(this.getColor()){
+          case NEGRO:
+            Posicion siguientePosLegal = new Posicion(this.posicion.getX()+1, this.posicion.getY());
+            verificar(siguientePosLegal, this.movimientosLegales);
+            if(this.posicion.getX() == 1){
+              Pieza pieza = tablero.getPieza(new Posicion(2,this.posicion.getY()));
+              Pieza pieza2 = tablero.getPieza(new Posicion(3,this.posicion.getY()));
+              if(pieza.getColor().equals(ColorEnum.NONE) && pieza2.getColor().equals(ColorEnum.NONE))
+                verificar(new Posicion(this.posicion.getX()+2, this.posicion.getY()), this.movimientosLegales);
+            }
+            // Movimiento para atacar piezas
+            verificarAtaque(new Posicion(this.posicion.getX()+1, this.posicion.getY()-1), this.movimientosLegales);
+            verificarAtaque(new Posicion(this.posicion.getX()+1, this.posicion.getY()+1), this.movimientosLegales);
+            break;
+
+          case BLANCO:
+            siguientePosLegal = new Posicion(this.posicion.getX()-1, this.posicion.getY());
+            verificar(siguientePosLegal, this.movimientosLegales);
+            if(this.posicion.getX() == 6){
+              Pieza pieza = tablero.getPieza(new Posicion(5,this.posicion.getY()));
+              Pieza pieza2 = tablero.getPieza(new Posicion(4,this.posicion.getY()));
+              if(pieza.getColor().equals(ColorEnum.NONE) && pieza2.getColor().equals(ColorEnum.NONE))
+                verificar(new Posicion(this.posicion.getX()-2, this.posicion.getY()), this.movimientosLegales);
+            }
+
+            // Movimiento para atacar piezas
+            verificarAtaque(new Posicion(this.posicion.getX()-1, this.posicion.getY()-1), this.movimientosLegales);
+            verificarAtaque(new Posicion(this.posicion.getX()-1, this.posicion.getY()+1), this.movimientosLegales);
+            break;
         }
-        else if(this.getColor() == ColorEnum.BLANCO){
-          Posicion siguientePosLegal = new Posicion(this.posicion.getX()-1, this.posicion.getY());
-          verificar(siguientePosLegal, this.movimientosLegales);
-          if(this.posicion.getX() == 6 && (tablero.getPieza(new Posicion(5,this.posicion.getY())) instanceof Empty)){
-            verificar(new Posicion(this.posicion.getX()-2, this.posicion.getY()), this.movimientosLegales);
-          }
-          // Movimiento para atacar piezas
-          verificarAtaque(new Posicion(this.posicion.getX()-1, this.posicion.getY()-1), this.movimientosLegales);
-          verificarAtaque(new Posicion(this.posicion.getX()-1, this.posicion.getY()+1), this.movimientosLegales);
-        }
+
+
+
+
+
     }
     return this.movimientosLegales;
   }

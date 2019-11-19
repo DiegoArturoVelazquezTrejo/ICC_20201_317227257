@@ -15,8 +15,8 @@ public class Caballo extends Pieza{
     Tablero tablero = Tablero.getInstance();
     if(this.estaDentroTablero(posicion)){
       Pieza pieza = tablero.getPieza(posicion);
-      if(pieza.getColor() == this.getColor()) return;
-      else if(pieza.getColor() == ColorEnum.NONE || pieza.getColor() != this.getColor()) lista.add(posicion);
+      if(pieza.getColor().equals(this.getColor())) return;
+      else if(pieza.getColor().equals(ColorEnum.NONE) || !pieza.getColor().equals(this.getColor())) lista.add(posicion);
     }
     return;
   }

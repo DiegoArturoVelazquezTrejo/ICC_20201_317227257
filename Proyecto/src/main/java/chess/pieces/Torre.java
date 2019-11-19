@@ -17,14 +17,14 @@ public class Torre extends Pieza{
         Tablero tablero = Tablero.getInstance();
         if (this.movimientosLegales == null) {
             this.movimientosLegales = new LinkedList<Posicion>();
- 
+
             // Moviéndose para adelante
             for(int i = this.posicion.getX()+1;i < 8; i++){
                 Posicion siguientePosLegal = new Posicion(i, this.posicion.getY());
                 if(!this.estaDentroTablero(siguientePosLegal)) break;
                 Pieza pieza = tablero.getPieza(siguientePosLegal);
-                if(pieza.getColor() == this.getColor())break;
-                if(pieza.getColor() != ColorEnum.NONE){
+                if(pieza.getColor().equals(this.getColor()))break;
+                if(!pieza.getColor().equals(ColorEnum.NONE)){
                     this.movimientosLegales.add(siguientePosLegal);
                     break;
                 }
@@ -35,8 +35,8 @@ public class Torre extends Pieza{
                 Posicion siguientePosLegal = new Posicion(i, this.posicion.getY());
                 if(!this.estaDentroTablero(siguientePosLegal)) break;
                 Pieza pieza = tablero.getPieza(siguientePosLegal);
-                if(pieza.getColor() == this.getColor())break;
-                if(pieza.getColor() != ColorEnum.NONE){
+                if(pieza.getColor().equals(this.getColor()))break;
+                if(!pieza.getColor().equals(ColorEnum.NONE)){
                     this.movimientosLegales.add(siguientePosLegal);
                     break;
                 }
@@ -48,8 +48,8 @@ public class Torre extends Pieza{
                 Posicion siguientePosLegal = new Posicion(this.posicion.getX(), i);
                 if(!this.estaDentroTablero(siguientePosLegal)) break;
                 Pieza pieza = tablero.getPieza(siguientePosLegal);
-                if(pieza.getColor() == this.getColor())break;
-                if(pieza.getColor() != ColorEnum.NONE){
+                if(pieza.getColor().equals(this.getColor()))break;
+                if(!pieza.getColor().equals(ColorEnum.NONE)){
                     this.movimientosLegales.add(siguientePosLegal);
                     break;
                 }
@@ -61,8 +61,8 @@ public class Torre extends Pieza{
                 Posicion siguientePosLegal = new Posicion(this.posicion.getX(), i);
                 if(!this.estaDentroTablero(siguientePosLegal)) break;
                 Pieza pieza = tablero.getPieza(siguientePosLegal);
-                if(pieza.getColor() == this.getColor())break;
-                if(pieza.getColor() != ColorEnum.NONE){
+                if(pieza.getColor().equals(this.getColor()))break;
+                if(!pieza.getColor().equals(ColorEnum.NONE)){
                     this.movimientosLegales.add(siguientePosLegal);
                     break;
                 }
