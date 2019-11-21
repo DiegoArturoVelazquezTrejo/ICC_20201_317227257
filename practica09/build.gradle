@@ -1,6 +1,6 @@
 apply plugin: 'java'
 apply plugin:'application'
-mainClassName = "Practica9"
+mainClassName = "Escritura"
 dependencies {
     // Dependency on local binaries
     implementation fileTree(dir: 'libs', include: ['core.jar'])
