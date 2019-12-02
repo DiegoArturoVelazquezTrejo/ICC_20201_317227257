@@ -42,26 +42,30 @@ public class JuegoVida extends PApplet implements Reglas{
 
   @Override public void setup(){
     im = "/cuadro6.png";
-    imagen = loadImage(getClass().getResource(im).getPath());
-    imagenPixeles = new Matriz(imagen.height, imagen.width);
-    imagen.loadPixels();
-    for (int i = 0; i < imagen.height; i++) {
-      for (int j = 0; j < imagen.width; j++) {
-        int loc = i + j*imagen.width;
-        if(loc < imagen.pixels.length){
-          int r = (int) red(imagen.pixels[loc]);
-          int g = (int) green(imagen.pixels[loc]);
-          int b = (int) blue(imagen.pixels[loc]);
-          int[] rgb = {r,g,b};
-          imagenPixeles.setPixel(i,j, new Pixel(rgb));
+    try{
+      imagen = loadImage(getClass().getResource(im).getPath());
+      imagenPixeles = new Matriz(imagen.height, imagen.width);
+      imagen.loadPixels();
+      for (int i = 0; i < imagen.height; i++) {
+        for (int j = 0; j < imagen.width; j++) {
+          int loc = i + j*imagen.width;
+          if(loc < imagen.pixels.length){
+            int r = (int) red(imagen.pixels[loc]);
+            int g = (int) green(imagen.pixels[loc]);
+            int b = (int) blue(imagen.pixels[loc]);
+            int[] rgb = {r,g,b};
+            imagenPixeles.setPixel(i,j, new Pixel(rgb));
+          }
         }
       }
+      copiaImagenPixeles = imagenPixeles.copia();
+    }catch(Exception e){
+      System.out.println("No se ha encontrado la imagen");
     }
-    copiaImagenPixeles = imagenPixeles.copia();
   }
 
   @Override public void draw(){
-    dibujaImagen();
+    if(imagen != null) dibujaImagen();
   }
 
   /**
