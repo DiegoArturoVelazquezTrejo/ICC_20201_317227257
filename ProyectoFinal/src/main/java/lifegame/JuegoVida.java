@@ -3,6 +3,7 @@ package lifegame;
 import lifegame.herramientas.Pixel;
 import lifegame.herramientas.Matriz;
 import lifegame.herramientas.FuncionesRandom;
+import lifegame.excepciones.ImagenNoExiste;
 import processing.core.PApplet;
 import processing.core.PImage;
 /**
@@ -17,7 +18,7 @@ public class JuegoVida extends PApplet implements Reglas{
   /* Rango inferior */
   int rangoInferior = 1000;
   /* Rango superior */
-  int rangoSuperior = 2295;
+  int rangoSuperior = 2900;
   /* Cota para saber si un pixel está vivo o muerto */
   int cotaSupervivencia = 500;
 
@@ -28,11 +29,11 @@ public class JuegoVida extends PApplet implements Reglas{
   Matriz imagenPixeles;
   /* Copia de la matriz de pixeles */
   Matriz copiaImagenPixeles;
+  /* Ruta de la imagen */
+  String im;
 
   public static void main(String args[]){
     PApplet.main("lifegame.JuegoVida");
-    //String im = args[0];
-    //int ciclos = Integer.parseInt(args[2]);
   }
 
   @Override public void settings(){
@@ -40,52 +41,59 @@ public class JuegoVida extends PApplet implements Reglas{
   }
 
   @Override public void setup(){
-    String im = "/paisaje.png";
+    im = "/cuadro6.png";
     imagen = loadImage(getClass().getResource(im).getPath());
     imagenPixeles = new Matriz(imagen.height, imagen.width);
     imagen.loadPixels();
-    //image(imagen, 0,0);
     for (int i = 0; i < imagen.height; i++) {
       for (int j = 0; j < imagen.width; j++) {
         int loc = i + j*imagen.width;
-        int r = (int) red(imagen.pixels[loc]);
-        int g = (int) green(imagen.pixels[loc]);
-        int b = (int) blue(imagen.pixels[loc]);
-        int[] rgb = {r,g,b};
-        imagenPixeles.setPixel(i,j, new Pixel(rgb));
+        if(loc < imagen.pixels.length){
+          int r = (int) red(imagen.pixels[loc]);
+          int g = (int) green(imagen.pixels[loc]);
+          int b = (int) blue(imagen.pixels[loc]);
+          int[] rgb = {r,g,b};
+          imagenPixeles.setPixel(i,j, new Pixel(rgb));
+        }
       }
     }
     copiaImagenPixeles = imagenPixeles.copia();
   }
 
   @Override public void draw(){
-    loadPixels();
+    dibujaImagen();
+  }
+
+  /**
+  * Método que dibuja la imagen en la pantalla
+  **/
+  public void dibujaImagen(){
+    imagen.loadPixels();
+    image(imagen,0,0);
     int loc = 0;
     for(int i =0; i < imagen.height; i++){
       for(int j =0; j < imagen.width; j++){
         Pixel p = copiaImagenPixeles.getPixel(i,j);
         loc = i + j*imagen.width;
-        pixels[loc] = color(p.getColor(0), p.getColor(1), p.getColor(2));
+        if(p != null) imagen.pixels[loc] = color(p.getColor(0), p.getColor(1), p.getColor(2));
       }
     }
-    updatePixels();
-    comenzar(20);
+    imagen.updatePixels();
+    comenzar();
   }
 
-    /**
+  /**
   * Método para comenzar con el juego de la vida
-  * @param : número de ciclos que durará el juego de la vida
   **/
-  public void comenzar(int ciclos){
-    int i = 0;
+  public void comenzar(){
     for(Pixel pix : this.imagenPixeles){
         // Adquirimos la suma por pixel de sus vecinos
         int sumaVecinos = this.imagenPixeles.sumaVecinos();
         if(this.estadoPixel(pix)){ // Esto quiere decir que el pixel está vivo
-          if(!(sumaVecinos > this.rangoInferior && sumaVecinos < this.rangoSuperior))
+          if(!(sumaVecinos > rangoInferior && sumaVecinos < rangoSuperior))
             this.pierdeCantidadAleatoria(pix);
         }else{ // pixel está muerto
-          if(sumaVecinos>cotaSupervivencia && sumaVecinos<cotaSupervivencia+255)
+          if(sumaVecinos>500 && sumaVecinos<rangoSuperior)
             this.aumentaCantidadAleatoria(pix);
         }
     }
@@ -97,6 +105,7 @@ public class JuegoVida extends PApplet implements Reglas{
   * @return : <p>true si está vivo</p> <p>false si está muerto </p>
   **/
   @Override public boolean estadoPixel(Pixel pixel){
+    if(pixel == null) return false;
     return pixel.sumaColores() > cotaSupervivencia;
   }
 
@@ -105,6 +114,7 @@ public class JuegoVida extends PApplet implements Reglas{
   * @param : Pixel pixel
   **/
   @Override public void pierdeCantidadAleatoria(Pixel pixel){
+    if(pixel == null) return;
     while(pixel.sumaColores()>500){
       int c = FuncionesRandom.randomNumber();
       FuncionesRandom.disminuyePixelRandom(pixel, c);
@@ -116,6 +126,7 @@ public class JuegoVida extends PApplet implements Reglas{
   * @param : Pixel
   **/
   @Override public void aumentaCantidadAleatoria(Pixel pixel){
+    if(pixel == null) return;
     while(pixel.sumaColores()<=500){
       int c = FuncionesRandom.randomNumber();
       FuncionesRandom.aumentaPixelRandom(pixel, c);

@@ -129,8 +129,8 @@ public class Matriz implements Iterable<Pixel>{
     **/
     public Matriz copia(){
       Matriz copia = new Matriz();
-      for(int i = 0; i < size; i++){
-        for(int j = 0; j < size; j++){
+      for(int i = 0; i < this.imagen.length; i++){
+        for(int j = 0; j < this.imagen[i].length; j++){
           copia.setPixel(i,j, this.imagen[i][j]);
         }
       }
@@ -144,7 +144,8 @@ public class Matriz implements Iterable<Pixel>{
     * @param : Pixel nuevo pixel
     **/
     public void setPixel(int i, int j, Pixel pixel){
-      this.imagen[i][j] = pixel;
+      if(i<this.imagen.length && j < this.imagen[i].length)
+        this.imagen[i][j] = pixel;
     }
 
     /**
@@ -154,7 +155,9 @@ public class Matriz implements Iterable<Pixel>{
     * @return : Pixel dentro de la imagen
     **/
     public Pixel getPixel(int i, int j){
-      return this.imagen[i][j];
+      if(i<this.imagen.length && j < this.imagen[i].length)
+        return this.imagen[i][j];
+      return null; 
     }
     /* regresa la imagen de la matriz*/
     public Pixel[][] getImagen(){
@@ -163,5 +166,15 @@ public class Matriz implements Iterable<Pixel>{
     /* Método para regresar un iterador */
     public Iterator<Pixel> iterator(){
       return new Iterador();
+    }
+    /* Imprime la suma de los colores por pixel de la imagen */
+    public void imprimeSumaPixeles(){
+      for(int i = 0; i < this.imagen.length; i++){
+        for(int j = 0; j <this.imagen[i].length; j++){
+          int suma = this.imagen[i][j].sumaColores();
+          System.out.print("["+suma+"],");
+        }
+        System.out.print("\n");
+      }
     }
 }

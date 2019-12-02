@@ -31,7 +31,7 @@ public class FuncionesRandom{
 
     // Objeto Random
     Random r = new Random();
-    int variableRandom = r.nextInt(150);
+    int variableRandom = r.nextInt(125);
     int color = pixel.getColor(numero);
     int nuevoColor = color + variableRandom;
     if(!(nuevoColor > 255))
@@ -44,7 +44,7 @@ public class FuncionesRandom{
 
     // Objeto Random
     Random r = new Random();
-    int variableRandom = r.nextInt(150);
+    int variableRandom = r.nextInt(125);
     int color = pixel.getColor(numero);
     int nuevoColor = color - variableRandom;
     if(nuevoColor>0 && nuevoColor<255)

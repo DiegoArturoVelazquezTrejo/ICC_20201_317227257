@@ -18,7 +18,7 @@ public class Pixel {
   **/
   public Pixel(int[] rgb){
     this.rgb = rgb;
-    this.setEstado();
+    this.setEstado(); 
   }
 
   /**

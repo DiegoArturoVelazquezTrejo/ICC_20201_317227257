@@ -27,5 +27,5 @@ public interface Reglas{
   * @param : Pixel
   **/
   public void aumentaCantidadAleatoria(Pixel pixel);
-
+ 
 }

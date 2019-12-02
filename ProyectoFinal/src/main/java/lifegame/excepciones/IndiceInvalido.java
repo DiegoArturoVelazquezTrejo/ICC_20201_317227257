@@ -1,4 +1,4 @@
-package lifegame.excepciones; 
+package lifegame.excepciones;
 /**
 * Excepción de índice inválido
 * @author : Diego Arturo Velázquez Trejo
@@ -17,3 +17,4 @@ public class IndiceInvalido extends Exception{
     super(m);
   }
 }
+ 
