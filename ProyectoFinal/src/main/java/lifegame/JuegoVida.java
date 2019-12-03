@@ -35,6 +35,8 @@ public class JuegoVida extends PApplet implements Reglas{
   public static void main(String args[]){
     PApplet.main("lifegame.JuegoVida");
     System.out.println("Ingresa la ruta de la imagen: "+"\n");
+    System.out.println(" Si presionas la tecla 1, en la ruta de la imagen se escribe .jpg");
+    System.out.println(" Si presionas la tecla 2, en la ruta de la imagen se escribe .png");
   }
 
   @Override public void settings(){
@@ -148,8 +150,8 @@ public class JuegoVida extends PApplet implements Reglas{
        imagen = null;
      }
     if(Character.getNumericValue(key) != -1){
-      if(key == 'j') this.im = this.im+".jpg";
-      else if(key == 'p') this.im = this.im+".png";
+      if(key == '1') this.im = this.im+".jpg";
+      else if(key == '2') this.im = this.im+".png";
       else this.im = this.im + key;
       System.out.println(this.im);
     }else{
@@ -157,5 +159,37 @@ public class JuegoVida extends PApplet implements Reglas{
     }
 
   }
-
+  /**
+  * Identifica cuando se realiza un click
+  **/
+  @Override
+  public void mouseClicked(){
+    try{
+      guardaImagen();
+    }catch(ImagenNoExiste e){
+      System.out.println(e.getMessage());
+    }
+  }
+  /**
+  * Método que guarda la imagen
+  **/
+  public void guardaImagen() throws ImagenNoExiste{
+    if(imagen != null){
+    imagen.loadPixels();
+    int a = 0;
+    int b = 0;
+    for(Pixel p : imagenPixeles){
+      int loc = a + b * height;
+      if(loc < imagen.pixels.length) imagen.pixels[loc] = color(p.getColor(0), p.getColor(1), p.getColor(2));
+      if(a == imagen.height){
+        a = 0;
+        b++;
+      }else{
+        b++;
+      }
+    }
+    imagen.save("resultado.jpg");
+    System.out.println("La imagen se ha guardado!");
+  }else throw new ImagenNoExiste("La imagen aún no ha sido seleccionada");
+  }
 }

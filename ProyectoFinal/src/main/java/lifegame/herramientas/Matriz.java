@@ -67,39 +67,22 @@ public class Matriz implements Iterable<Pixel>{
       int i = filas;
       int j = columnas;
       int suma = 0;
-      try{
-        suma = suma + this.imagen[i-1][j-1].sumaColores();
-      }catch(Exception e){}
-      try{
-        suma = suma + this.imagen[i-1][j].sumaColores();
-      }catch(Exception e){}
-      try{
-        suma = suma + this.imagen[i-1][j+1].sumaColores();
-      }catch(Exception e){}
-      try{
-        suma = suma + this.imagen[i][j-1].sumaColores();
-      }catch(Exception e){}
-      try{
-        suma = suma + this.imagen[i][j+1].sumaColores();
-      }catch(Exception e){}
-      try{
-        suma = suma + this.imagen[i+1][j-1].sumaColores();
-      }catch(Exception e){}
-      try{
-        suma = suma + this.imagen[i+1][j].sumaColores();
-      }catch(Exception e){}
-      try{
-        suma = suma + this.imagen[i+1][j+1].sumaColores();
-      }catch(Exception e){}
-      finally{
 
-        this.columnas++;
-        if(this.columnas == imagen[this.filas].length){
-          this.columnas = 0;
-          this.filas++;
-        }
-        return suma;
+      if(i > 0 && j > 0) suma = suma + this.imagen[i-1][j-1].sumaColores();
+      if((i<this.imagen.length+1 && i >0) && j >= 0)suma = suma + this.imagen[i-1][j].sumaColores();
+      if((i<this.imagen.length+1 && i >0) && j < this.imagen[i].length -1)suma = suma + this.imagen[i-1][j+1].sumaColores();
+      if((i >= 0 && j < this.imagen[i].length +1) && j > 0)suma = suma + this.imagen[i][j-1].sumaColores();
+      if(i >= 0 && j < this.imagen[i].length -1)suma = suma + this.imagen[i][j+1].sumaColores();
+      if(i < this.imagen.length-1 && (j > 0 && j < this.imagen[i].length + 1))suma = suma + this.imagen[i+1][j-1].sumaColores();
+      if(i < this.imagen.length-1 && j >= 0)suma = suma + this.imagen[i+1][j].sumaColores();
+      if(i < this.imagen.length -1 && j < this.imagen[i].length -1)suma = suma + this.imagen[i+1][j+1].sumaColores();
+      this.columnas++;
+      if(this.columnas == imagen[this.filas].length){
+        this.columnas = 0;
+        this.filas++;
       }
+      return suma;
+
     }
 
     /**
