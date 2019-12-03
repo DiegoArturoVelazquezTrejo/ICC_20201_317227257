@@ -7,6 +7,7 @@ import lifegame.excepciones.ImagenNoExiste;
 import lifegame.excepciones.IndiceInvalido;
 import processing.core.PApplet;
 import processing.core.PImage;
+import java.util.Scanner;
 /**
 * Clase que modela el Juego de la Vida
 * @author: Diego Arturo Velázquez
@@ -29,37 +30,46 @@ public class JuegoVida extends PApplet implements Reglas{
   /* Copia de la matriz de pixeles */
   Matriz copiaImagenPixeles;
   /* Ruta de la imagen */
-  String im;
+  String im = "/";
 
   public static void main(String args[]){
     PApplet.main("lifegame.JuegoVida");
+    System.out.println("Ingresa la ruta de la imagen: "+"\n");
   }
 
   @Override public void settings(){
       size(500,500);
   }
+
+  @Override public void setup(){}
+
   /**
   * Se inicializa la imagenPixeles con los pixeles de la imagen que se trabajará
   **/
-  @Override public void setup(){
-    im = "/wolf.jpg";
-    imagen = loadImage(getClass().getResource(im).getPath());
-    this.imagenPixeles = new Matriz(imagen.height, imagen.width);
-    imagen.loadPixels();
-    for (int i = 0; i < imagen.height; i++) {
-      for (int j = 0; j < imagen.width; j++) {
-        int loc = i + j*imagen.height;
-        int r = (int) red(imagen.pixels[loc]);
-        int g = (int) green(imagen.pixels[loc]);
-        int b = (int) blue(imagen.pixels[loc]);
-        int[] rgb = {r,g,b};
-        this.imagenPixeles.setPixel(i,j,new Pixel(rgb));
+  public void setupImagen(){
+    try{
+      imagen = loadImage(getClass().getResource(im).getPath());
+      this.imagenPixeles = new Matriz(imagen.height, imagen.width);
+      imagen.loadPixels();
+      for (int i = 0; i < imagen.height; i++) {
+        for (int j = 0; j < imagen.width; j++) {
+          int loc = i + j*imagen.height;
+          int r = (int) red(imagen.pixels[loc]);
+          int g = (int) green(imagen.pixels[loc]);
+          int b = (int) blue(imagen.pixels[loc]);
+          int[] rgb = {r,g,b};
+          this.imagenPixeles.setPixel(i,j,new Pixel(rgb));
+        }
       }
+      copiaImagenPixeles = imagenPixeles.copia();
+    }catch(Exception e){
+      System.out.println("Imagen Inválida, escribe la ruta de nuevo");
+      im = "/";
     }
-    copiaImagenPixeles = imagenPixeles.copia();
   }
+
   /**
-  * Este método está dibujando constantemente la imagen copia 
+  * Este método está dibujando constantemente la imagen copia
   **/
   @Override public void draw(){
     try{
@@ -93,12 +103,11 @@ public class JuegoVida extends PApplet implements Reglas{
   **/
   public void comenzar(){
     for(Pixel pix : this.imagenPixeles){
-        // Adquirimos la suma por pixel de sus vecinos
         int sumaVecinos = this.imagenPixeles.sumaVecinos();
-        if(pix.getEstado()){ // Esto quiere decir que el pixel está vivo
+        if(pix.getEstado()){
           if(!(sumaVecinos > rangoInferior && sumaVecinos < rangoSuperior))
             this.pierdeCantidadAleatoria(pix);
-        }else{ // pixel está muerto
+        }else{
           if(sumaVecinos>500 && sumaVecinos<755)
             this.aumentaCantidadAleatoria(pix);
         }
@@ -128,6 +137,25 @@ public class JuegoVida extends PApplet implements Reglas{
       int c = FuncionesRandom.randomNumber();
       FuncionesRandom.aumentaPixelRandom(pixel, c);
     }
+  }
+
+  /**
+  * Método que espera la lectura de caracteres para que el usuario le pase la imagen
+  **/
+  public void keyPressed(){
+    if(imagen != null && im.length() > 0){
+       im = "/";
+       imagen = null;
+     }
+    if(Character.getNumericValue(key) != -1){
+      if(key == 'j') this.im = this.im+".jpg";
+      else if(key == 'p') this.im = this.im+".png";
+      else this.im = this.im + key;
+      System.out.println(this.im);
+    }else{
+      this.setupImagen();
+    }
+
   }
 
 }
