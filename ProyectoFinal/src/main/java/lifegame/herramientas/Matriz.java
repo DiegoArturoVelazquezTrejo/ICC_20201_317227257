@@ -11,9 +11,6 @@ public class Matriz implements Iterable<Pixel>{
     /* arreglo de pixeles de la imágen */
     public Pixel[][] imagen;
 
-    /* Tamaño de la imagen */
-    private int size = 500;
-
     /* Indice en columnas de la matriz*/
     int columnas = 0;
     /* Indice en filas de la matriz */
@@ -50,30 +47,12 @@ public class Matriz implements Iterable<Pixel>{
     }
 
     /**
-    * Constructor por omisión
-    **/
-    public Matriz(){
-      this.imagen = new Pixel[size][size];
-    }
-    /**
     * Constructor
     * @param : int n
     * @param : int m
     **/
     public Matriz(int n, int m){
       this.imagen = new Pixel[n][m];
-    }
-    /**
-    * Constructor
-    * @param : array
-    **/
-    public Matriz(int[][][] array){
-      this.imagen = new Pixel[array.length][array[0].length];
-      for(int i = 0; i < array.length; i++){
-        for(int j = 0; j < array[0].length; j++){
-          this.imagen[i][j] = new Pixel(array[i][j]);
-        }
-      }
     }
 
     /**
@@ -128,10 +107,11 @@ public class Matriz implements Iterable<Pixel>{
     * @return : Matriz copiada
     **/
     public Matriz copia(){
-      Matriz copia = new Matriz();
-      for(int i = 0; i < this.imagen.length; i++){
-        for(int j = 0; j < this.imagen[i].length; j++){
-          copia.setPixel(i,j, this.imagen[i][j]);
+      Matriz copia = new Matriz(this.imagen.length, this.imagen[0].length);
+      for(int i = 0; i < imagen.length; i++){
+        for(int j = 0; j < imagen[i].length; j++){
+          Pixel p = this.getPixel(i,j);
+          copia.setPixel(i,j,p);
         }
       }
       return copia;
@@ -144,8 +124,7 @@ public class Matriz implements Iterable<Pixel>{
     * @param : Pixel nuevo pixel
     **/
     public void setPixel(int i, int j, Pixel pixel){
-      if(i<this.imagen.length && j < this.imagen[i].length)
-        this.imagen[i][j] = pixel;
+      this.imagen[i][j] = pixel;
     }
 
     /**
@@ -155,9 +134,7 @@ public class Matriz implements Iterable<Pixel>{
     * @return : Pixel dentro de la imagen
     **/
     public Pixel getPixel(int i, int j){
-      if(i<this.imagen.length && j < this.imagen[i].length)
-        return this.imagen[i][j];
-      return null; 
+      return this.imagen[i][j];
     }
     /* regresa la imagen de la matriz*/
     public Pixel[][] getImagen(){
@@ -166,15 +143,5 @@ public class Matriz implements Iterable<Pixel>{
     /* Método para regresar un iterador */
     public Iterator<Pixel> iterator(){
       return new Iterador();
-    }
-    /* Imprime la suma de los colores por pixel de la imagen */
-    public void imprimeSumaPixeles(){
-      for(int i = 0; i < this.imagen.length; i++){
-        for(int j = 0; j <this.imagen[i].length; j++){
-          int suma = this.imagen[i][j].sumaColores();
-          System.out.print("["+suma+"],");
-        }
-        System.out.print("\n");
-      }
     }
 }

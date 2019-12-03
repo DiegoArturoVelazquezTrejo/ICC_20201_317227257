@@ -1,6 +1,7 @@
 package lifegame.herramientas;
 
 import lifegame.herramientas.Pixel;
+import lifegame.excepciones.ColorInvalido; 
 import java.util.Random;
 /**
 * Clase para modelar los métodos de cambio aleatorio en los pixeles
@@ -34,8 +35,13 @@ public class FuncionesRandom{
     int variableRandom = r.nextInt(125);
     int color = pixel.getColor(numero);
     int nuevoColor = color + variableRandom;
-    if(!(nuevoColor > 255))
-      pixel.setColor(numero, nuevoColor);
+    if(nuevoColor > 0 && nuevoColor <255){
+      try{
+        pixel.setColor(numero, nuevoColor);
+      }catch(ColorInvalido e){
+        System.out.println(e.getMessage());
+      }
+    }
   }
   /**
   * Método que modifica aleatoriamente el color del pixel
@@ -47,8 +53,13 @@ public class FuncionesRandom{
     int variableRandom = r.nextInt(125);
     int color = pixel.getColor(numero);
     int nuevoColor = color - variableRandom;
-    if(nuevoColor>0 && nuevoColor<255)
-      pixel.setColor(numero, nuevoColor);
+    if(nuevoColor>0 && nuevoColor<255){
+      try{
+        pixel.setColor(numero, nuevoColor);
+      }catch(ColorInvalido e){
+        System.out.println(e.getMessage());
+      }
+    }
   }
 
 

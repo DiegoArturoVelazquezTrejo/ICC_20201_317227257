@@ -4,6 +4,7 @@ import lifegame.herramientas.Pixel;
 import lifegame.herramientas.Matriz;
 import lifegame.herramientas.FuncionesRandom;
 import lifegame.excepciones.ImagenNoExiste;
+import lifegame.excepciones.IndiceInvalido;
 import processing.core.PApplet;
 import processing.core.PImage;
 /**
@@ -19,8 +20,6 @@ public class JuegoVida extends PApplet implements Reglas{
   int rangoInferior = 1000;
   /* Rango superior */
   int rangoSuperior = 2900;
-  /* Cota para saber si un pixel está vivo o muerto */
-  int cotaSupervivencia = 500;
 
   /* Imagen donde se realizará el juego de la vida */
   PImage imagen;
@@ -39,47 +38,50 @@ public class JuegoVida extends PApplet implements Reglas{
   @Override public void settings(){
       size(500,500);
   }
-
+  /**
+  * Se inicializa la imagenPixeles con los pixeles de la imagen que se trabajará
+  **/
   @Override public void setup(){
-    im = "/cuadro6.png";
-    try{
-      imagen = loadImage(getClass().getResource(im).getPath());
-      imagenPixeles = new Matriz(imagen.height, imagen.width);
-      imagen.loadPixels();
-      for (int i = 0; i < imagen.height; i++) {
-        for (int j = 0; j < imagen.width; j++) {
-          int loc = i + j*imagen.width;
-          if(loc < imagen.pixels.length){
-            int r = (int) red(imagen.pixels[loc]);
-            int g = (int) green(imagen.pixels[loc]);
-            int b = (int) blue(imagen.pixels[loc]);
-            int[] rgb = {r,g,b};
-            imagenPixeles.setPixel(i,j, new Pixel(rgb));
-          }
-        }
+    im = "/wolf.jpg";
+    imagen = loadImage(getClass().getResource(im).getPath());
+    this.imagenPixeles = new Matriz(imagen.height, imagen.width);
+    imagen.loadPixels();
+    for (int i = 0; i < imagen.height; i++) {
+      for (int j = 0; j < imagen.width; j++) {
+        int loc = i + j*imagen.height;
+        int r = (int) red(imagen.pixels[loc]);
+        int g = (int) green(imagen.pixels[loc]);
+        int b = (int) blue(imagen.pixels[loc]);
+        int[] rgb = {r,g,b};
+        this.imagenPixeles.setPixel(i,j,new Pixel(rgb));
       }
-      copiaImagenPixeles = imagenPixeles.copia();
-    }catch(Exception e){
-      System.out.println("No se ha encontrado la imagen");
     }
+    copiaImagenPixeles = imagenPixeles.copia();
   }
-
+  /**
+  * Este método está dibujando constantemente la imagen copia 
+  **/
   @Override public void draw(){
-    if(imagen != null) dibujaImagen();
+    try{
+      if(imagen != null) dibujaImagen();
+    }catch(IndiceInvalido e){
+      System.out.println(e.getMessage());
+    }
   }
 
   /**
   * Método que dibuja la imagen en la pantalla
   **/
-  public void dibujaImagen(){
+  public void dibujaImagen() throws IndiceInvalido{
     imagen.loadPixels();
     image(imagen,0,0);
     int loc = 0;
     for(int i =0; i < imagen.height; i++){
       for(int j =0; j < imagen.width; j++){
         Pixel p = copiaImagenPixeles.getPixel(i,j);
-        loc = i + j*imagen.width;
-        if(p != null) imagen.pixels[loc] = color(p.getColor(0), p.getColor(1), p.getColor(2));
+        loc = i + j*imagen.height;
+        if(loc >= imagen.pixels.length) throw new IndiceInvalido("Indice Inválido");
+        imagen.pixels[loc] = color(p.getColor(0), p.getColor(1), p.getColor(2));
       }
     }
     imagen.updatePixels();
@@ -93,24 +95,15 @@ public class JuegoVida extends PApplet implements Reglas{
     for(Pixel pix : this.imagenPixeles){
         // Adquirimos la suma por pixel de sus vecinos
         int sumaVecinos = this.imagenPixeles.sumaVecinos();
-        if(this.estadoPixel(pix)){ // Esto quiere decir que el pixel está vivo
+        if(pix.getEstado()){ // Esto quiere decir que el pixel está vivo
           if(!(sumaVecinos > rangoInferior && sumaVecinos < rangoSuperior))
             this.pierdeCantidadAleatoria(pix);
         }else{ // pixel está muerto
-          if(sumaVecinos>500 && sumaVecinos<rangoSuperior)
+          if(sumaVecinos>500 && sumaVecinos<755)
             this.aumentaCantidadAleatoria(pix);
         }
     }
     copiaImagenPixeles = imagenPixeles.copia();
-  }
-  /**
-  * Regla que determina si un pixel está vivo o muerto
-  * @param : Pixel
-  * @return : <p>true si está vivo</p> <p>false si está muerto </p>
-  **/
-  @Override public boolean estadoPixel(Pixel pixel){
-    if(pixel == null) return false;
-    return pixel.sumaColores() > cotaSupervivencia;
   }
 
   /**
