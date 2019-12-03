@@ -20,7 +20,7 @@ public class JuegoVida extends PApplet implements Reglas{
   /* Rango inferior */
   int rangoInferior = 1000;
   /* Rango superior */
-  int rangoSuperior = 2900;
+  int rangoSuperior = 2295;
 
   /* Imagen donde se realizará el juego de la vida */
   PImage imagen;
@@ -35,8 +35,11 @@ public class JuegoVida extends PApplet implements Reglas{
   public static void main(String args[]){
     PApplet.main("lifegame.JuegoVida");
     System.out.println("Ingresa la ruta de la imagen: "+"\n");
-    System.out.println(" Si presionas la tecla 1, en la ruta de la imagen se escribe .jpg");
-    System.out.println(" Si presionas la tecla 2, en la ruta de la imagen se escribe .png");
+    System.out.println(" a) Si presionas la tecla 1, en la ruta de la imagen se escribe .jpg");
+    System.out.println("-----------------------------------------------------------------");
+    System.out.println(" b) Si presionas la tecla 2, en la ruta de la imagen se escribe .png");
+    System.out.println("-----------------------------------------------------------------");
+    System.out.println(" c) Para guardar la imagen dale click!");
   }
 
   @Override public void settings(){
@@ -53,6 +56,7 @@ public class JuegoVida extends PApplet implements Reglas{
       imagen = loadImage(getClass().getResource(im).getPath());
       this.imagenPixeles = new Matriz(imagen.height, imagen.width);
       imagen.loadPixels();
+      frameRate(6000);
       for (int i = 0; i < imagen.height; i++) {
         for (int j = 0; j < imagen.width; j++) {
           int loc = i + j*imagen.height;
@@ -153,7 +157,7 @@ public class JuegoVida extends PApplet implements Reglas{
       if(key == '1') this.im = this.im+".jpg";
       else if(key == '2') this.im = this.im+".png";
       else this.im = this.im + key;
-      System.out.println(this.im);
+      System.out.print(this.im);
     }else{
       this.setupImagen();
     }
@@ -169,6 +173,7 @@ public class JuegoVida extends PApplet implements Reglas{
     }catch(ImagenNoExiste e){
       System.out.println(e.getMessage());
     }
+    im = "/";
   }
   /**
   * Método que guarda la imagen
@@ -189,7 +194,7 @@ public class JuegoVida extends PApplet implements Reglas{
       }
     }
     imagen.save("resultado.jpg");
-    System.out.println("La imagen se ha guardado!");
-  }else throw new ImagenNoExiste("La imagen aún no ha sido seleccionada");
+    System.out.println("\nLa imagen se ha guardado!\n");
+  }else throw new ImagenNoExiste("La imagen aún no ha sido seleccionada\n");
   }
 }
