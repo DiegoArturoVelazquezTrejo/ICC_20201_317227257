@@ -34,12 +34,16 @@ public class JuegoVida extends PApplet implements Reglas{
 
   public static void main(String args[]){
     PApplet.main("lifegame.JuegoVida");
-    System.out.println("Ingresa la ruta de la imagen: "+"\n");
+    System.out.println("Ingresa el nombre de la imagen SIN EXTENSIÓN: "+"\n");
+    System.out.println("\n(Si te equivocas al teclear el nombre, presiona enter y vuelve a ingresar el nombre)");
+    System.out.println("\nPara agregar extensión de la imagen siga los pasos: \n");
     System.out.println(" a) Si presionas la tecla 1, en la ruta de la imagen se escribe .jpg");
     System.out.println("-----------------------------------------------------------------");
     System.out.println(" b) Si presionas la tecla 2, en la ruta de la imagen se escribe .png");
+    System.out.println("\n ----------------------- Presiona ENTER -----------------------\n");
     System.out.println("-----------------------------------------------------------------");
-    System.out.println(" c) Para guardar la imagen dale click!");
+    System.out.println(" c) Para guardar la imagen dale click!\n\n");
+    System.out.println("\n\nSi deseas cambiar la imagen, vuelve a escribir el nombre de la nueva imagen\n");
   }
 
   @Override public void settings(){
@@ -69,7 +73,7 @@ public class JuegoVida extends PApplet implements Reglas{
       }
       copiaImagenPixeles = imagenPixeles.copia();
     }catch(Exception e){
-      System.out.println("Imagen Inválida, escribe la ruta de nuevo");
+      System.out.println("\nImagen Inválida, escribe la ruta de nuevo\n");
       im = "/";
     }
   }
