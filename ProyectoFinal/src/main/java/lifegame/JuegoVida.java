@@ -47,7 +47,7 @@ public class JuegoVida extends PApplet implements Reglas{
   }
 
   @Override public void settings(){
-      size(500,500);
+    size(100,100);
   }
 
   @Override public void setup(){}
@@ -58,6 +58,8 @@ public class JuegoVida extends PApplet implements Reglas{
   public void setupImagen(){
     try{
       imagen = loadImage(getClass().getResource(im).getPath());
+      surface.setResizable(true);
+      surface.setSize(imagen.width, imagen.height);
       this.imagenPixeles = new Matriz(imagen.height, imagen.width);
       imagen.loadPixels();
       frameRate(6000);
